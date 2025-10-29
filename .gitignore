@@ -48,12 +48,7 @@ htmlcov/
 .tox/
 .hypothesis/
 
-# ML artifacts (large binary files)
-backend/artifacts/*.npy
-backend/artifacts/*.index
-backend/artifacts/*.json
-backend/artifacts/*.pkl
-backend/artifacts/sentence_transformer_model/
+
 
 # Local image storage (migrated to S3)
 backend/local_images/
