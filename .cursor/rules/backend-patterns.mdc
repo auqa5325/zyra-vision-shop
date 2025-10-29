@@ -1,0 +1,75 @@
+---
+description: Backend development patterns and conventions for FastAPI/Python
+globs: ['backend/**/*.py']
+alwaysApply: true
+---
+
+# Backend Development Guidelines
+
+## FastAPI Patterns
+- Follow FastAPI best practices with proper dependency injection
+- Use Pydantic models for request/response validation
+- Implement proper error handling with HTTPException
+- Use async/await patterns for database operations
+- Follow the established router pattern in `app/api/`
+
+## Project Structure
+- API endpoints in `app/api/` with proper router organization
+- Database models in `app/models/` using SQLAlchemy
+- Service layer in `app/services/` for business logic
+- Schemas in `app/schemas/` for Pydantic models
+- Middleware in `app/middleware/` for cross-cutting concerns
+
+## Database & ORM
+- Use SQLAlchemy 2.0+ with async patterns
+- Follow the existing database schema in DATABASE_SCHEMA.md
+- Use Alembic for database migrations
+- Implement proper foreign key relationships
+- Use UUID for primary keys where appropriate
+
+## Authentication & Security
+- Use JWT tokens for authentication
+- Implement proper password hashing with bcrypt
+- Use the JWTAuthMiddleware for protected routes
+- Follow OAuth2 patterns for API security
+- Implement proper CORS configuration
+
+## API Design
+- Follow RESTful API conventions
+- Use proper HTTP status codes
+- Implement pagination for list endpoints
+- Use proper error responses with consistent format
+- Document APIs with FastAPI automatic documentation
+
+## ML/AI Integration
+- Use the model_loader pattern for ML model management
+- Implement proper async loading for large models
+- Use FAISS for vector similarity search
+- Follow the hybrid recommendation system patterns
+- Implement proper error handling for ML operations
+
+## Configuration & Environment
+- Use Pydantic Settings for configuration management
+- Follow environment variable patterns
+- Use proper logging with Python logging module
+- Implement proper CORS and security settings
+
+## Testing
+- Use pytest for testing
+- Implement proper test fixtures
+- Use pytest-asyncio for async testing
+- Follow the existing test patterns in `tests/`
+
+## Performance & Monitoring
+- Implement proper logging and monitoring
+- Use async patterns for I/O operations
+- Implement proper caching strategies
+- Use proper database connection pooling
+- Monitor ML model performance
+
+## Code Quality
+- Follow PEP 8 style guidelines
+- Use proper type hints throughout
+- Implement proper error handling and logging
+- Use proper import organization
+- Follow the existing code patterns and conventions

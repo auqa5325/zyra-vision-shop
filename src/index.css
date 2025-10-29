@@ -1,0 +1,122 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
+All colors MUST be HSL.
+*/
+
+@layer base {
+  :root {
+    /* Base colors - light theme */
+    --background: 0 0% 100%;
+    --foreground: 240 10% 10%;
+
+    /* Violet primary - AI/tech theme */
+    --primary: 260 80% 60%;
+    --primary-foreground: 0 0% 100%;
+    --primary-glow: 260 90% 70%;
+    
+    /* Teal secondary - fresh accent */
+    --secondary: 180 70% 50%;
+    --secondary-foreground: 0 0% 100%;
+    
+    /* Card styles */
+    --card: 0 0% 100%;
+    --card-foreground: 240 10% 10%;
+    
+    /* Muted elements */
+    --muted: 240 5% 96%;
+    --muted-foreground: 240 5% 45%;
+    
+    /* Accent - teal variant */
+    --accent: 180 80% 55%;
+    --accent-foreground: 0 0% 100%;
+    
+    /* Borders and inputs */
+    --border: 240 6% 90%;
+    --input: 240 6% 90%;
+    --ring: 260 80% 60%;
+    
+    /* Destructive */
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+    
+    /* Popover */
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 10% 10%;
+    
+    /* Radius */
+    --radius: 0.75rem;
+    
+    /* Custom gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(260 80% 60%), hsl(180 70% 50%));
+    --gradient-hero: linear-gradient(135deg, hsl(260 80% 65%), hsl(180 75% 55%));
+    --gradient-card: linear-gradient(180deg, hsl(0 0% 100%), hsl(240 5% 98%));
+    
+    /* Shadows with violet glow */
+    --shadow-sm: 0 1px 2px 0 hsl(260 80% 60% / 0.05);
+    --shadow-md: 0 4px 6px -1px hsl(260 80% 60% / 0.1), 0 2px 4px -1px hsl(260 80% 60% / 0.06);
+    --shadow-lg: 0 10px 15px -3px hsl(260 80% 60% / 0.1), 0 4px 6px -2px hsl(260 80% 60% / 0.05);
+    --shadow-glow: 0 0 30px hsl(260 80% 70% / 0.3);
+    --shadow-card: 0 2px 8px hsl(260 50% 50% / 0.08);
+    
+    /* Animations */
+    --transition-base: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .dark {
+    --background: 240 10% 8%;
+    --foreground: 0 0% 98%;
+    
+    --primary: 260 85% 65%;
+    --primary-foreground: 0 0% 100%;
+    --primary-glow: 260 90% 75%;
+    
+    --secondary: 180 75% 55%;
+    --secondary-foreground: 0 0% 100%;
+    
+    --card: 240 10% 12%;
+    --card-foreground: 0 0% 98%;
+    
+    --muted: 240 10% 15%;
+    --muted-foreground: 240 5% 65%;
+    
+    --accent: 180 80% 60%;
+    --accent-foreground: 0 0% 100%;
+    
+    --border: 240 10% 20%;
+    --input: 240 10% 20%;
+    --ring: 260 85% 65%;
+    
+    --destructive: 0 84% 65%;
+    --destructive-foreground: 0 0% 100%;
+    
+    --popover: 240 10% 12%;
+    --popover-foreground: 0 0% 98%;
+    
+    --shadow-card: 0 2px 8px hsl(260 50% 30% / 0.3);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+@layer utilities {
+  /* Hide scrollbar for horizontal carousels */
+  .scrollbar-hide {
+    -ms-overflow-style: none;  /* Internet Explorer 10+ */
+    scrollbar-width: none;  /* Firefox */
+  }
+  .scrollbar-hide::-webkit-scrollbar { 
+    display: none;  /* Safari and Chrome */
+  }
+}

@@ -1,0 +1,71 @@
+---
+description: API integration patterns and service layer guidelines
+globs: ['src/services/**/*.ts', 'src/hooks/**/*.ts', 'backend/app/api/**/*.py']
+alwaysApply: false
+---
+
+# API Integration & Service Layer Guidelines
+
+## Frontend Service Layer
+- Use the established service pattern in `src/services/`
+- Implement proper error handling with try-catch blocks
+- Use React Query for all API calls and state management
+- Follow the existing service patterns (api.ts, authService.ts, productService.ts, etc.)
+- Use proper TypeScript interfaces from `src/types/` for API responses
+
+## API Service Patterns
+- **api.ts**: Base API configuration with axios instance
+- **authService.ts**: Authentication-related API calls
+- **productService.ts**: Product-related API calls
+- **recommendationService.ts**: ML recommendation API calls
+- **userDataService.ts**: User data synchronization
+- **chatbotService.ts**: Chatbot integration
+
+## Custom Hooks Pattern
+- Use custom hooks in `src/hooks/` for reusable API logic
+- Implement proper loading states and error handling
+- Use React Query patterns for caching and synchronization
+- Follow existing hook patterns (useAuth.ts, useProducts.ts, useRecommendations.ts)
+
+## Backend API Structure
+- Organize API endpoints in `app/api/` with proper router separation
+- Use FastAPI dependency injection for authentication
+- Implement proper request/response validation with Pydantic
+- Use proper HTTP status codes and error responses
+- Follow RESTful API conventions
+
+## API Endpoint Patterns
+- **Authentication**: `/auth/*` - Login, register, token management
+- **Products**: `/products/*` - Product CRUD, search, filtering
+- **Recommendations**: `/recommendations/*` - ML-powered recommendations
+- **Interactions**: `/interactions/*` - User behavior tracking
+- **Users**: `/users/*` - User profile management
+- **Reviews**: `/reviews/*` - Product reviews and ratings
+
+## Error Handling
+- Use consistent error response format
+- Implement proper HTTP status codes
+- Use proper error boundaries in React components
+- Implement proper retry logic for failed requests
+- Use proper logging for API errors
+
+## Data Synchronization
+- Use React Query for automatic data synchronization
+- Implement proper optimistic updates
+- Use proper cache invalidation strategies
+- Implement proper offline handling
+- Use proper real-time updates where needed
+
+## Performance Optimization
+- Implement proper request caching
+- Use proper pagination for large datasets
+- Implement proper lazy loading for components
+- Use proper debouncing for search inputs
+- Implement proper request deduplication
+
+## Security Patterns
+- Use JWT tokens for API authentication
+- Implement proper CORS configuration
+- Use proper input validation and sanitization
+- Implement proper rate limiting
+- Use proper HTTPS for all API calls

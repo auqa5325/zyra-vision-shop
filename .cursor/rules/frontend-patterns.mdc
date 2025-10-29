@@ -1,0 +1,57 @@
+---
+description: Frontend development patterns and conventions for React/TypeScript
+globs: ['src/**/*.tsx', 'src/**/*.ts', '*.tsx', '*.ts']
+alwaysApply: true
+---
+
+# Frontend Development Guidelines
+
+## React & TypeScript Patterns
+- Use functional components with hooks exclusively
+- Implement proper TypeScript typing for all props, state, and API responses
+- Use React Query (@tanstack/react-query) for all API calls and state management
+- Follow the established service pattern in `src/services/` for API integration
+- Use custom hooks in `src/hooks/` for reusable logic
+
+## Component Structure
+- Place reusable UI components in `src/components/ui/` (shadcn/ui components)
+- Page components go in `src/pages/`
+- Feature-specific components in `src/components/`
+- Use proper component composition and prop drilling avoidance
+- Implement ErrorBoundary for error handling
+
+## Styling & UI
+- Use Tailwind CSS for all styling
+- Follow the existing design system with shadcn/ui components
+- Use `clsx` and `tailwind-merge` for conditional styling
+- Implement responsive design with mobile-first approach
+- Use Lucide React for icons
+
+## State Management
+- Use React Query for server state management
+- Use React Context for global client state (AuthContext)
+- Use local state with useState/useReducer for component-specific state
+- Implement proper loading and error states
+
+## Routing & Navigation
+- Use React Router v6 patterns
+- Implement proper route protection with authentication
+- Use proper navigation patterns with useNavigate
+
+## API Integration
+- Follow the established service pattern in `src/services/`
+- Use proper error handling with try-catch blocks
+- Implement proper loading states and error boundaries
+- Use TypeScript interfaces from `src/types/` for API responses
+
+## Performance
+- Implement proper memoization with useMemo and useCallback
+- Use React.lazy for code splitting when appropriate
+- Optimize images and assets
+- Follow Vite build optimization patterns
+
+## Code Quality
+- Use ESLint configuration as defined in eslint.config.js
+- Follow TypeScript strict mode guidelines
+- Implement proper error handling and user feedback
+- Use proper naming conventions (camelCase for variables, PascalCase for components)

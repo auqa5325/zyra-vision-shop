@@ -1,0 +1,83 @@
+{
+  "categories": [
+    {
+      "name": "Fashion & Apparel",
+      "subcategories": [
+        { "name": "Men’s T-Shirts", "product_count": 180 },
+        { "name": "Men’s Ethnic Wear", "product_count": 120 },
+        { "name": "Women’s Kurtas & Kurtis", "product_count": 200 },
+        { "name": "Women’s Sarees", "product_count": 150 },
+        { "name": "Kids Wear", "product_count": 100 },
+        { "name": "Footwear (Men/Women)", "product_count": 120 },
+        { "name": "Bags & Wallets", "product_count": 80 },
+        { "name": "Accessories (Belts, Caps)", "product_count": 50 },
+        { "name": "Watches", "product_count": 100 }
+      ],
+      "total_products": 1000
+    },
+    {
+      "name": "Electronics & Gadgets",
+      "subcategories": [
+        { "name": "Smartphones", "product_count": 160 },
+        { "name": "Mobile Accessories", "product_count": 120 },
+        { "name": "Laptops", "product_count": 80 },
+        { "name": "Smartwatches", "product_count": 100 },
+        { "name": "Earphones & Headphones", "product_count": 100 },
+        { "name": "Smart TVs", "product_count": 60 },
+        { "name": "Cameras & DSLRs", "product_count": 60 },
+        { "name": "Computer Accessories", "product_count": 80 }
+      ],
+      "total_products": 760
+    },
+    {
+      "name": "Home & Kitchen",
+      "subcategories": [
+        { "name": "Cookware", "product_count": 100 },
+        { "name": "Kitchen Appliances (Mixers, Grinders)", "product_count": 80 },
+        { "name": "Dinner Sets", "product_count": 60 },
+        { "name": "Home Decor", "product_count": 80 },
+        { "name": "Bedsheets & Curtains", "product_count": 100 },
+        { "name": "Furniture (Chairs, Tables)", "product_count": 60 },
+        { "name": "Cleaning Supplies", "product_count": 60 },
+        { "name": "Storage & Containers", "product_count": 60 }
+      ],
+      "total_products": 600
+    },
+    {
+      "name": "Beauty & Personal Care",
+      "subcategories": [
+        { "name": "Skincare", "product_count": 80 },
+        { "name": "Hair Care", "product_count": 70 },
+        { "name": "Makeup", "product_count": 80 },
+        { "name": "Fragrances", "product_count": 40 },
+        { "name": "Health Supplements", "product_count": 60 }
+      ],
+      "total_products": 330
+    },
+    {
+      "name": "Groceries & Daily Needs",
+      "subcategories": [
+        { "name": "Rice & Grains", "product_count": 80 },
+        { "name": "Masalas & Spices", "product_count": 60 },
+        { "name": "Snacks & Beverages", "product_count": 80 },
+        { "name": "Oils & Ghee", "product_count": 40 },
+        { "name": "Household Essentials (Detergent, Cleaners)", "product_count": 60 },
+        { "name": "Personal Hygiene (Soap, Shampoo)", "product_count": 50 }
+      ],
+      "total_products": 370
+    },
+    {
+      "name": "Sports & Lifestyle",
+      "subcategories": [
+        { "name": "Fitness Equipment", "product_count": 60 },
+        { "name": "Sportswear", "product_count": 60 },
+        { "name": "Yoga Mats & Accessories", "product_count": 30 },
+        { "name": "Travel Bags", "product_count": 40 },
+        { "name": "Bicycles & Gear", "product_count": 40 },
+        { "name": "Outdoor Games (Cricket, Badminton)", "product_count": 40 }
+      ],
+      "total_products": 270
+    }
+  ],
+  "total_product_count": 3330
+}

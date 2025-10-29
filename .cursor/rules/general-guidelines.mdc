@@ -1,0 +1,80 @@
+---
+description: General project guidelines and conventions
+globs: ['**/*']
+alwaysApply: true
+---
+
+# Zyra Vision Shop - General Project Guidelines
+
+## Project Overview
+Zyra Vision Shop is a modern e-commerce platform with AI-powered recommendations and chatbot integration. The project consists of a React/TypeScript frontend and a Python/FastAPI backend with ML capabilities.
+
+## Architecture Principles
+- **Microservices Architecture**: Separate frontend and backend services
+- **API-First Design**: RESTful APIs with proper documentation
+- **ML Integration**: Hybrid recommendation system with content-based and collaborative filtering
+- **Modern Tech Stack**: React 18, TypeScript, FastAPI, PostgreSQL, Redis
+- **Cloud-Ready**: AWS S3 integration, Docker containerization
+
+## Development Workflow
+- Use feature branches for development
+- Follow conventional commit messages
+- Implement proper testing (unit, integration, e2e)
+- Use proper code review processes
+- Follow CI/CD best practices
+
+## Code Organization
+- **Frontend**: React components, hooks, services, types
+- **Backend**: FastAPI routers, models, services, schemas
+- **ML**: Model management, training scripts, artifacts
+- **Database**: SQLAlchemy models, migrations, schema documentation
+- **Documentation**: Comprehensive docs in `docs/` directory
+
+## Quality Standards
+- Use TypeScript strict mode for frontend
+- Use Python type hints for backend
+- Follow ESLint and Prettier configurations
+- Implement proper error handling and logging
+- Use proper testing patterns and coverage
+
+## Security Guidelines
+- Implement proper authentication and authorization
+- Use JWT tokens for API security
+- Follow OWASP security guidelines
+- Implement proper input validation
+- Use proper CORS configuration
+
+## Performance Guidelines
+- Implement proper caching strategies
+- Use async patterns for I/O operations
+- Optimize database queries and indexes
+- Implement proper image optimization
+- Use proper code splitting and lazy loading
+
+## Documentation Standards
+- Maintain up-to-date API documentation
+- Document all major features and components
+- Use proper code comments and docstrings
+- Maintain README files for each major component
+- Document deployment and configuration procedures
+
+## Environment Management
+- Use proper environment variable management
+- Implement proper configuration patterns
+- Use Docker for containerization
+- Follow proper secrets management
+- Implement proper logging and monitoring
+
+## Testing Strategy
+- Unit tests for individual components/functions
+- Integration tests for API endpoints
+- End-to-end tests for critical user flows
+- Performance tests for ML models
+- Security tests for authentication and authorization
+
+## Deployment Guidelines
+- Use proper CI/CD pipelines
+- Implement proper environment promotion
+- Use proper database migration strategies
+- Implement proper monitoring and alerting
+- Follow proper rollback procedures

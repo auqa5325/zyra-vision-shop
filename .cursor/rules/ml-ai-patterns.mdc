@@ -1,0 +1,72 @@
+---
+description: ML/AI development patterns and model management
+globs: ['backend/app/ml/**/*.py', 'backend/scripts/ml/**/*.py', 'backend/artifacts/**/*']
+alwaysApply: false
+---
+
+# ML/AI Development Guidelines
+
+## Model Management
+- Use the model_loader pattern in `app/ml/model_loader.py`
+- Store ML artifacts in `backend/artifacts/` directory
+- Implement proper async loading for large models
+- Use proper error handling for model loading failures
+- Implement model versioning and rollback strategies
+
+## Recommendation System Architecture
+- Implement hybrid recommendation system combining:
+  - Content-based filtering using product embeddings
+  - Collaborative filtering using user-item interactions
+  - Hybrid scoring with configurable alpha parameter
+- Use FAISS for efficient vector similarity search
+- Use sentence-transformers for text embeddings
+- Implement proper cold-start handling for new users/products
+
+## ML Libraries & Dependencies
+- Use sentence-transformers for text embeddings
+- Use implicit for collaborative filtering (ALS algorithm)
+- Use FAISS for vector similarity search
+- Use scikit-learn for additional ML utilities
+- Use numpy and pandas for data manipulation
+
+## Model Artifacts
+- Store trained models in `backend/artifacts/`
+- Include model metadata in `model_info.json`
+- Store embeddings as numpy arrays (.npy files)
+- Store FAISS indices for efficient retrieval
+- Store user and item factors for collaborative filtering
+
+## Performance Optimization
+- Implement proper caching for model predictions
+- Use async patterns for model inference
+- Implement proper batch processing for large datasets
+- Use proper memory management for large models
+- Monitor model performance and accuracy
+
+## Data Pipeline
+- Implement proper data preprocessing pipelines
+- Use proper feature engineering techniques
+- Implement proper train/validation/test splits
+- Use proper cross-validation strategies
+- Implement proper data quality checks
+
+## Model Training & Evaluation
+- Use proper evaluation metrics (precision, recall, NDCG)
+- Implement proper A/B testing for model comparison
+- Use proper hyperparameter tuning strategies
+- Implement proper model monitoring and logging
+- Use proper model deployment strategies
+
+## Integration Patterns
+- Use proper API patterns for ML endpoints
+- Implement proper error handling for ML operations
+- Use proper logging for ML operations
+- Implement proper rate limiting for ML endpoints
+- Use proper caching strategies for ML predictions
+
+## Code Quality
+- Follow proper ML code organization patterns
+- Use proper type hints for ML code
+- Implement proper error handling and logging
+- Use proper testing patterns for ML code
+- Follow proper documentation standards for ML models

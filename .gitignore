@@ -1,0 +1,65 @@
+# Environment files
+.env
+backend/.env
+.env.*
+env.example
+
+# IDE and Editor
+.cursor/*
+.cursor
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Dependencies
+node_modules/
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# Build outputs
+dist/
+build/
+*.egg-info/
+.eggs/
+
+# Logs
+*.log
+logs/
+backend/*.log
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+.hypothesis/
+
+# ML artifacts (large binary files)
+backend/artifacts/*.npy
+backend/artifacts/*.index
+backend/artifacts/*.json
+backend/artifacts/*.pkl
+backend/artifacts/sentence_transformer_model/
+
+# Local image storage (migrated to S3)
+backend/local_images/
+backend/uploads/
+
+# Temporary files
+*.tmp
+*.temp
+.cache/

@@ -1,0 +1,66 @@
+---
+description: Database schema and migration guidelines
+globs: ['backend/app/models/**/*.py', 'backend/scripts/migration/**/*.py', 'backend/app/database.py', 'DATABASE_SCHEMA.md']
+alwaysApply: false
+---
+
+# Database Schema & Migration Guidelines
+
+## Database Schema Reference
+- Always reference DATABASE_SCHEMA.md for current schema structure
+- Database: PostgreSQL on localhost:5432/zyra_db
+- Total Tables: 15 (ab_tests, categories, embeddings_meta, interactions, product_images, products, purchase_history, recommendation_logs, review_helpful_votes, reviews, sessions, system_audit, user_cart, user_wishlist, users)
+
+## Table Conventions
+- Use UUID for primary keys where appropriate (users.user_id)
+- Use INTEGER for auto-incrementing IDs (products.product_id, categories.category_id)
+- Use TIMESTAMP with timezone for created_at/updated_at fields
+- Use proper foreign key relationships with referential integrity
+- Use VARCHAR with appropriate length limits
+- Use BOOLEAN for flags and status fields
+
+## Key Tables & Relationships
+- **users**: Central user table with UUID primary key
+- **products**: Main product catalog with category relationships
+- **categories**: Hierarchical category structure with parent_id
+- **interactions**: User behavior tracking (views, clicks, purchases)
+- **reviews**: Product reviews with helpful voting system
+- **user_cart/user_wishlist**: User-specific product collections
+- **recommendation_logs**: ML recommendation tracking
+- **sessions**: User session management
+
+## Migration Guidelines
+- Use Alembic for all database migrations
+- Create migration scripts in `backend/scripts/migration/`
+- Always test migrations on development database first
+- Use proper rollback strategies
+- Document schema changes in migration comments
+- Follow naming conventions: YYYY_MM_DD_HHMM_description.py
+
+## Model Patterns
+- Use SQLAlchemy 2.0+ async patterns
+- Implement proper relationship definitions
+- Use proper column types and constraints
+- Implement proper indexes for performance
+- Use proper cascade behaviors for foreign keys
+
+## Data Integrity
+- Maintain referential integrity with foreign keys
+- Use proper constraints and validations
+- Implement soft deletes where appropriate
+- Use proper default values and nullable constraints
+- Follow ACID principles for transactions
+
+## Performance Considerations
+- Create proper indexes for frequently queried columns
+- Use proper foreign key indexes
+- Consider partitioning for large tables
+- Use proper query optimization patterns
+- Monitor query performance and optimize as needed
+
+## Schema Evolution
+- Plan schema changes carefully
+- Use backward-compatible changes when possible
+- Implement proper data migration strategies
+- Test schema changes thoroughly
+- Document all schema modifications

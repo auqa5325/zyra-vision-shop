@@ -1,0 +1,362 @@
+[
+  {
+    "product_id": "14f020dc-0453-40dc-b7bf-d92cad860dbc",
+    "name": "Wiley Later Non-fiction",
+    "description": "High-quality non-fiction from Wiley",
+    "price": 539.0,
+    "image_url": "https://picsum.photos/seed/14f020dc-0453-40dc-b7bf-d92cad860dbc_1/400/400",
+    "rating": 4.8,
+    "category": "Non-fiction",
+    "tags": [
+      "wiley",
+      "non-fiction",
+      "books",
+      "budget",
+      "compact"
+    ],
+    "brand": "Wiley",
+    "available": true
+  },
+  {
+    "product_id": "3e2fd1c8-f848-45c0-b7af-1e429ce324dd",
+    "name": "Anthropologie Indeed Decor",
+    "description": "High-quality decor from Anthropologie",
+    "price": 35613.0,
+    "image_url": "https://picsum.photos/seed/3e2fd1c8-f848-45c0-b7af-1e429ce324dd_1/400/400",
+    "rating": 4.7,
+    "category": "Decor",
+    "tags": [
+      "anthropologie",
+      "decor",
+      "home & living",
+      "new",
+      "wireless"
+    ],
+    "brand": "Anthropologie",
+    "available": true
+  },
+  {
+    "product_id": "4e158b15-1bbe-457c-a4e4-219a7122dd11",
+    "name": "Calvin Klein Prevent Men's' Clothing",
+    "description": "High-quality men's clothing from Calvin Klein",
+    "price": 4174.0,
+    "image_url": "https://picsum.photos/seed/4e158b15-1bbe-457c-a4e4-219a7122dd11_1/400/400",
+    "rating": 4.3,
+    "category": "Men's Clothing",
+    "tags": [
+      "calvin klein",
+      "men's-clothing",
+      "fashion",
+      "popular",
+      "compact"
+    ],
+    "brand": "Calvin Klein",
+    "available": true
+  },
+  {
+    "product_id": "2758d31b-39f0-4e04-93d0-e3cbf2e39a45",
+    "name": "Under Armour One Sportwear",
+    "description": "High-quality sportswear from Under Armour",
+    "price": 32876.0,
+    "image_url": "https://picsum.photos/seed/2758d31b-39f0-4e04-93d0-e3cbf2e39a45_1/400/400",
+    "rating": 4.7,
+    "category": "Sportswear",
+    "tags": [
+      "under armour",
+      "sportswear",
+      "fitness",
+      "budget",
+      "smart"
+    ],
+    "brand": "Under Armour",
+    "available": true
+  },
+  {
+    "product_id": "e75b070b-4775-49e8-8b19-e5f13b68ce8b",
+    "name": "Adidas Ultraboost Detail Footwear",
+    "description": "High-quality footwear from Adidas Ultraboost",
+    "price": 16341.0,
+    "image_url": "https://picsum.photos/seed/e75b070b-4775-49e8-8b19-e5f13b68ce8b_1/400/400",
+    "rating": 4.0,
+    "category": "Footwear",
+    "tags": [
+      "adidas ultraboost",
+      "footwear",
+      "fashion",
+      "new",
+      "compact"
+    ],
+    "brand": "Adidas Ultraboost",
+    "available": true
+  },
+  {
+    "product_id": "08ffc2f7-277a-4508-bc4c-4834ba4b2302",
+    "name": "HP Pavilion Always Laptop",
+    "description": "High-quality laptops from HP Pavilion",
+    "price": 31589.0,
+    "image_url": "https://picsum.photos/seed/08ffc2f7-277a-4508-bc4c-4834ba4b2302_1/400/400",
+    "rating": 4.5,
+    "category": "Laptops",
+    "tags": [
+      "hp pavilion",
+      "laptops",
+      "electronics",
+      "popular",
+      "wireless"
+    ],
+    "brand": "HP Pavilion",
+    "available": true
+  },
+  {
+    "product_id": "0bc01512-db97-41a0-891e-c19573102f68",
+    "name": "Fujifilm X Turn Camera",
+    "description": "High-quality cameras from Fujifilm X",
+    "price": 86481.0,
+    "image_url": "https://picsum.photos/seed/0bc01512-db97-41a0-891e-c19573102f68_1/400/400",
+    "rating": 4.7,
+    "category": "Cameras",
+    "tags": [
+      "fujifilm x",
+      "cameras",
+      "electronics",
+      "new",
+      "bluetooth"
+    ],
+    "brand": "Fujifilm X",
+    "available": true
+  },
+  {
+    "product_id": "821ed3ae-130b-4c6d-8895-2d78c717fb6d",
+    "name": "Tommy Hilfiger Clear Men's' Clothing",
+    "description": "High-quality men's clothing from Tommy Hilfiger",
+    "price": 13238.0,
+    "image_url": "https://picsum.photos/seed/821ed3ae-130b-4c6d-8895-2d78c717fb6d_1/400/400",
+    "rating": 4.3,
+    "category": "Men's Clothing",
+    "tags": [
+      "tommy hilfiger",
+      "men's-clothing",
+      "fashion",
+      "new",
+      "compact"
+    ],
+    "brand": "Tommy Hilfiger",
+    "available": false
+  },
+  {
+    "product_id": "0772f14e-9b64-4ff8-ad7f-558f782bf509",
+    "name": "BSN Claim Supplement",
+    "description": "High-quality supplements from BSN",
+    "price": 30689.0,
+    "image_url": "https://picsum.photos/seed/0772f14e-9b64-4ff8-ad7f-558f782bf509_1/400/400",
+    "rating": 4.0,
+    "category": "Supplements",
+    "tags": [
+      "bsn",
+      "supplements",
+      "fitness",
+      "bestseller",
+      "portable"
+    ],
+    "brand": "BSN",
+    "available": true
+  },
+  {
+    "product_id": "c2658ae1-7623-45b7-b427-d491d40cdc93",
+    "name": "Cellucor The Supplement",
+    "description": "High-quality supplements from Cellucor",
+    "price": 33620.0,
+    "image_url": "https://picsum.photos/seed/c2658ae1-7623-45b7-b427-d491d40cdc93_1/400/400",
+    "rating": 4.0,
+    "category": "Supplements",
+    "tags": [
+      "cellucor",
+      "supplements",
+      "fitness",
+      "new",
+      "smart"
+    ],
+    "brand": "Cellucor",
+    "available": true
+  },
+  {
+    "product_id": "fdd8b551-268d-4789-b9f0-a2822b6ed651",
+    "name": "Gaiam Late Yoga",
+    "description": "High-quality yoga from Gaiam",
+    "price": 30200.0,
+    "image_url": "https://picsum.photos/seed/fdd8b551-268d-4789-b9f0-a2822b6ed651_1/400/400",
+    "rating": 3.9,
+    "category": "Yoga",
+    "tags": [
+      "gaiam",
+      "yoga",
+      "fitness",
+      "popular",
+      "compact"
+    ],
+    "brand": "Gaiam",
+    "available": true
+  },
+  {
+    "product_id": "cc30a0b5-3c4a-42cb-a4fa-1240fd828d41",
+    "name": "Michael Kors Series Acceorie",
+    "description": "High-quality accessories from Michael Kors",
+    "price": 2934.0,
+    "image_url": "https://picsum.photos/seed/cc30a0b5-3c4a-42cb-a4fa-1240fd828d41_1/400/400",
+    "rating": 3.9,
+    "category": "Accessories",
+    "tags": [
+      "michael kors",
+      "accessories",
+      "fashion",
+      "budget",
+      "smart"
+    ],
+    "brand": "Michael Kors",
+    "available": true
+  },
+  {
+    "product_id": "7a45a0b4-f7f4-4847-b135-d18367d65354",
+    "name": "IKEA Him Furniture",
+    "description": "High-quality furniture from IKEA",
+    "price": 22496.0,
+    "image_url": "https://picsum.photos/seed/7a45a0b4-f7f4-4847-b135-d18367d65354_1/400/400",
+    "rating": 3.7,
+    "category": "Furniture",
+    "tags": [
+      "ikea",
+      "furniture",
+      "home & living",
+      "bestseller",
+      "smart"
+    ],
+    "brand": "IKEA",
+    "available": true
+  },
+  {
+    "product_id": "c010b101-52f4-4bee-a450-87f82ca885e5",
+    "name": "CB2 Law Decor",
+    "description": "High-quality decor from CB2",
+    "price": 4090.0,
+    "image_url": "https://picsum.photos/seed/c010b101-52f4-4bee-a450-87f82ca885e5_1/400/400",
+    "rating": 3.6,
+    "category": "Decor",
+    "tags": [
+      "cb2",
+      "decor",
+      "home & living",
+      "new",
+      "smart"
+    ],
+    "brand": "CB2",
+    "available": true
+  },
+  {
+    "product_id": "1ee6d53d-4d45-4414-9a10-fd6e718ea747",
+    "name": "New Balance Offer Footwear",
+    "description": "High-quality footwear from New Balance",
+    "price": 5169.0,
+    "image_url": "https://picsum.photos/seed/1ee6d53d-4d45-4414-9a10-fd6e718ea747_1/400/400",
+    "rating": 3.8,
+    "category": "Footwear",
+    "tags": [
+      "new balance",
+      "footwear",
+      "fashion",
+      "new",
+      "portable"
+    ],
+    "brand": "New Balance",
+    "available": true
+  },
+  {
+    "product_id": "0c088559-b8dd-401b-b580-d06e79d5aa49",
+    "name": "Wayfair Stand Decor",
+    "description": "High-quality decor from Wayfair",
+    "price": 31389.0,
+    "image_url": "https://picsum.photos/seed/0c088559-b8dd-401b-b580-d06e79d5aa49_1/400/400",
+    "rating": 4.6,
+    "category": "Decor",
+    "tags": [
+      "wayfair",
+      "decor",
+      "home & living",
+      "popular",
+      "compact"
+    ],
+    "brand": "Wayfair",
+    "available": true
+  },
+  {
+    "product_id": "dcab5d2e-4d0e-4c8e-b08c-b2f457606deb",
+    "name": "Yoga Design Lab So Yoga",
+    "description": "High-quality yoga from Yoga Design Lab",
+    "price": 22970.0,
+    "image_url": "https://picsum.photos/seed/dcab5d2e-4d0e-4c8e-b08c-b2f457606deb_1/400/400",
+    "rating": 3.8,
+    "category": "Yoga",
+    "tags": [
+      "yoga design lab",
+      "yoga",
+      "fitness",
+      "popular",
+      "smart"
+    ],
+    "brand": "Yoga Design Lab",
+    "available": true
+  },
+  {
+    "product_id": "b483c199-8644-4f16-b794-90235aa9ce62",
+    "name": "KitchenAid Street Kitchen",
+    "description": "High-quality kitchen from KitchenAid",
+    "price": 76352.0,
+    "image_url": "https://picsum.photos/seed/b483c199-8644-4f16-b794-90235aa9ce62_1/400/400",
+    "rating": 3.6,
+    "category": "Kitchen",
+    "tags": [
+      "kitchenaid",
+      "kitchen",
+      "home & living",
+      "bestseller",
+      "compact"
+    ],
+    "brand": "KitchenAid",
+    "available": true
+  },
+  {
+    "product_id": "23b1fc16-5e7d-4eb4-a994-9038beb18441",
+    "name": "Garmin Consumer Smart Watche",
+    "description": "High-quality smart watches from Garmin",
+    "price": 82224.0,
+    "image_url": "https://picsum.photos/seed/23b1fc16-5e7d-4eb4-a994-9038beb18441_1/400/400",
+    "rating": 4.7,
+    "category": "Smart Watches",
+    "tags": [
+      "garmin",
+      "smart-watches",
+      "electronics",
+      "budget",
+      "compact"
+    ],
+    "brand": "Garmin",
+    "available": true
+  },
+  {
+    "product_id": "3e77d989-e006-49fd-8542-3c7f996407a3",
+    "name": "Lululemon Unit Sportwear",
+    "description": "High-quality sportswear from Lululemon",
+    "price": 31154.0,
+    "image_url": "https://picsum.photos/seed/3e77d989-e006-49fd-8542-3c7f996407a3_1/400/400",
+    "rating": 4.7,
+    "category": "Sportswear",
+    "tags": [
+      "lululemon",
+      "sportswear",
+      "fitness",
+      "budget",
+      "portable"
+    ],
+    "brand": "Lululemon",
+    "available": true
+  }
+]
