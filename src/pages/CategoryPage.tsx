@@ -257,27 +257,28 @@ const CategoryPage = () => {
       <Header />
       
       <main className="flex-1">
-        <div className="container px-4 py-8">
+        <div className="container px-4 py-4 sm:py-6 lg:py-8">
           <Button
             variant="ghost"
             onClick={() => navigate("/")}
-            className="mb-6"
+            className="mb-4 sm:mb-6"
+            size="sm"
           >
             <ArrowLeft className="w-4 h-4 mr-2" />
             Back to Home
           </Button>
 
-          <div className="mb-8">
+          <div className="mb-6 sm:mb-8">
             {/* Header with title and controls */}
-            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-4">
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 sm:gap-4 mb-4">
               <div className="flex-1">
-                <h1 className="text-3xl sm:text-4xl font-bold text-foreground mb-2">
+                <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-foreground mb-2">
                   {categoryName}
                 </h1>
-                <p className="text-muted-foreground">
+                <p className="text-sm sm:text-base text-muted-foreground">
                   {isParentCategory ? categoryProducts.length : filteredAndSortedProducts.length} products available
                   {isParentCategory && (
-                    <span className="ml-2 text-sm">
+                    <span className="ml-2 text-xs sm:text-sm">
                       (including {category?.children.length} subcategories)
                     </span>
                   )}
@@ -290,8 +291,9 @@ const CategoryPage = () => {
                   /* Subcategory Dropdown for Parent Categories */
                   <DropdownMenu>
                     <DropdownMenuTrigger asChild>
-                      <Button variant="outline" className="flex items-center gap-2">
-                        Browse Subcategories
+                      <Button variant="outline" className="flex items-center gap-2 w-full sm:w-auto" size="sm">
+                        <span className="hidden sm:inline">Browse Subcategories</span>
+                        <span className="sm:hidden">Browse</span>
                         <ChevronDown className="w-4 h-4" />
                       </Button>
                     </DropdownMenuTrigger>
@@ -308,7 +310,7 @@ const CategoryPage = () => {
                   </DropdownMenu>
                 ) : (
                   /* Filter and Sort Buttons for Subcategory Pages */
-                  <>
+                  <div className="flex gap-2 w-full sm:w-auto">
                     <FilterModal
                       onApplyFilters={applyFilters}
                       onClearFilters={clearFilters}
@@ -323,7 +325,7 @@ const CategoryPage = () => {
                       currentSort={sortOptions}
                       productCount={filteredAndSortedProducts.length}
                     />
-                  </>
+                  </div>
                 )}
               </div>
             </div>
@@ -331,7 +333,7 @@ const CategoryPage = () => {
 
           {/* Show subcategories in linear layout if this is a parent category */}
           {isParentCategory && category?.children && (
-            <div className="space-y-8">
+            <div className="space-y-6 sm:space-y-8">
               {category.children
                 .filter((subcategory) => {
                   const products = subcategoryProductsMap[subcategory.category_id] || [];
@@ -354,8 +356,8 @@ const CategoryPage = () => {
           {!isParentCategory && (
             <>
               {filteredAndSortedProducts.length === 0 ? (
-                <div className="text-center py-12">
-                  <p className="text-muted-foreground text-lg">
+                <div className="text-center py-8 sm:py-12">
+                  <p className="text-muted-foreground text-base sm:text-lg">
                     {categoryProducts.length === 0 
                       ? "No products found in this category." 
                       : "No products match your current filters."}
@@ -365,13 +367,14 @@ const CategoryPage = () => {
                       variant="outline" 
                       onClick={clearFilters}
                       className="mt-4"
+                      size="sm"
                     >
                       Clear Filters
                     </Button>
                   )}
                 </div>
               ) : (
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-4 lg:gap-6">
                   {filteredAndSortedProducts.map((product) => (
                     <ProductCard key={product.product_id} product={product} />
                   ))}
