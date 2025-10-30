@@ -38,14 +38,14 @@ export const WhatYouMayLikeCarousel = ({ userId, limit = 8 }: WhatYouMayLikeCaro
         </div>
 
         <div className="relative">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4 lg:gap-6">
             {[...Array(4)].map((_, i) => (
               <div key={i} className="bg-card rounded-xl border overflow-hidden">
                 <div className="aspect-square bg-muted/50 rounded-t-xl animate-pulse"></div>
-                <div className="p-4">
-                  <div className="h-6 bg-muted/50 rounded animate-pulse mb-2"></div>
-                  <div className="h-4 bg-muted/50 rounded animate-pulse mb-3"></div>
-                  <div className="h-8 bg-muted/50 rounded animate-pulse"></div>
+                <div className="p-3 sm:p-4">
+                  <div className="h-4 sm:h-6 bg-muted/50 rounded animate-pulse mb-2"></div>
+                  <div className="h-3 sm:h-4 bg-muted/50 rounded animate-pulse mb-2 sm:mb-3"></div>
+                  <div className="h-6 sm:h-8 bg-muted/50 rounded animate-pulse"></div>
                 </div>
               </div>
             ))}
@@ -104,9 +104,9 @@ export const WhatYouMayLikeCarousel = ({ userId, limit = 8 }: WhatYouMayLikeCaro
           }}
           className="w-full"
         >
-          <CarouselContent className="-ml-2 md:-ml-4">
+          <CarouselContent className="-ml-1 sm:-ml-2 md:-ml-4">
             {recommendations.map((product) => (
-              <CarouselItem key={product.product_id} className="pl-2 md:pl-4 md:basis-1/2 lg:basis-1/3 xl:basis-1/4 flex">
+              <CarouselItem key={product.product_id} className="pl-1 sm:pl-2 md:pl-4 basis-1/2 sm:basis-1/3 md:basis-1/2 lg:basis-1/3 xl:basis-1/4 flex">
                 <div className="w-full h-full">
                   <ProductCard product={product} />
                 </div>

@@ -202,27 +202,28 @@ const AdminPage = () => {
     <div className="min-h-screen flex flex-col bg-background">
       <Header />
       
-      <main className="flex-1 container px-4 py-12 max-w-4xl mx-auto">
-        <div className="mb-8">
-          <h1 className="text-4xl font-bold text-foreground mb-2">Admin Panel</h1>
-          <p className="text-muted-foreground">
+      <main className="flex-1 container px-4 py-6 sm:py-8 lg:py-12 max-w-4xl mx-auto">
+        <div className="mb-6 sm:mb-8">
+          <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-foreground mb-2">Admin Panel</h1>
+          <p className="text-sm sm:text-base text-muted-foreground">
             Manage and retrain the ALS recommendation model
           </p>
         </div>
 
         {/* Model Status Card */}
-        <Card className="mb-6">
-          <CardHeader>
-            <div className="flex items-center justify-between">
+        <Card className="mb-4 sm:mb-6">
+          <CardHeader className="pb-3 sm:pb-6">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-0">
               <div>
-                <CardTitle>Model Status</CardTitle>
-                <CardDescription>Current state of loaded ML models</CardDescription>
+                <CardTitle className="text-lg sm:text-xl">Model Status</CardTitle>
+                <CardDescription className="text-sm">Current state of loaded ML models</CardDescription>
               </div>
               <Button
                 variant="outline"
                 size="sm"
                 onClick={fetchModelStatus}
                 disabled={isLoadingStatus}
+                className="w-full sm:w-auto"
               >
                 {isLoadingStatus ? (
                   <Loader2 className="h-4 w-4 animate-spin mr-2" />
@@ -235,38 +236,38 @@ const AdminPage = () => {
           </CardHeader>
           <CardContent>
             {modelStatus ? (
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
                 <div className="flex items-center gap-2">
                   {modelStatus.faiss_loaded ? (
-                    <CheckCircle className="h-5 w-5 text-green-500" />
+                    <CheckCircle className="h-4 w-4 sm:h-5 sm:w-5 text-green-500" />
                   ) : (
-                    <XCircle className="h-5 w-5 text-red-500" />
+                    <XCircle className="h-4 w-4 sm:h-5 sm:w-5 text-red-500" />
                   )}
-                  <span className="text-sm">FAISS Index</span>
+                  <span className="text-xs sm:text-sm">FAISS Index</span>
                 </div>
                 <div className="flex items-center gap-2">
                   {modelStatus.sentence_transformer_loaded ? (
-                    <CheckCircle className="h-5 w-5 text-green-500" />
+                    <CheckCircle className="h-4 w-4 sm:h-5 sm:w-5 text-green-500" />
                   ) : (
-                    <XCircle className="h-5 w-5 text-red-500" />
+                    <XCircle className="h-4 w-4 sm:h-5 sm:w-5 text-red-500" />
                   )}
-                  <span className="text-sm">Sentence Transformer</span>
+                  <span className="text-xs sm:text-sm">Sentence Transformer</span>
                 </div>
                 <div className="flex items-center gap-2">
                   {modelStatus.als_loaded ? (
-                    <CheckCircle className="h-5 w-5 text-green-500" />
+                    <CheckCircle className="h-4 w-4 sm:h-5 sm:w-5 text-green-500" />
                   ) : (
-                    <XCircle className="h-5 w-5 text-red-500" />
+                    <XCircle className="h-4 w-4 sm:h-5 sm:w-5 text-red-500" />
                   )}
-                  <span className="text-sm">ALS Model</span>
+                  <span className="text-xs sm:text-sm">ALS Model</span>
                 </div>
                 {modelStatus.als_loaded && (
                   <>
-                    <div className="text-sm">
+                    <div className="text-xs sm:text-sm">
                       <span className="text-muted-foreground">Users: </span>
                       <span className="font-semibold">{modelStatus.als_users_count}</span>
                     </div>
-                    <div className="text-sm">
+                    <div className="text-xs sm:text-sm">
                       <span className="text-muted-foreground">Items: </span>
                       <span className="font-semibold">{modelStatus.als_items_count}</span>
                     </div>
@@ -274,36 +275,37 @@ const AdminPage = () => {
                 )}
               </div>
             ) : (
-              <p className="text-muted-foreground text-sm">Loading status...</p>
+              <p className="text-muted-foreground text-xs sm:text-sm">Loading status...</p>
             )}
           </CardContent>
         </Card>
 
         {/* Actions Card */}
         <Card>
-          <CardHeader>
-            <CardTitle>Model Training</CardTitle>
-            <CardDescription>
+          <CardHeader className="pb-3 sm:pb-6">
+            <CardTitle className="text-lg sm:text-xl">Model Training</CardTitle>
+            <CardDescription className="text-sm">
               Retrain the ALS collaborative filtering model with updated interaction data
             </CardDescription>
           </CardHeader>
-          <CardContent className="space-y-4">
-            <div className="p-4 bg-muted/50 rounded-lg">
-              <p className="text-sm text-muted-foreground mb-2">
+          <CardContent className="space-y-3 sm:space-y-4">
+            <div className="p-3 sm:p-4 bg-muted/50 rounded-lg">
+              <p className="text-xs sm:text-sm text-muted-foreground mb-2">
                 <strong>Retrain & Reload:</strong> Trains a new ALS model using all current interactions 
                 and automatically reloads it into memory. This process runs in the background and may take 
                 several minutes.
               </p>
-              <p className="text-sm text-muted-foreground">
+              <p className="text-xs sm:text-sm text-muted-foreground">
                 <strong>Reload Only:</strong> Reloads the existing trained model from disk without retraining.
               </p>
             </div>
 
-            <div className="flex gap-4">
+            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
               <Button
                 onClick={handleRetrainAndReload}
                 disabled={isRetraining || isReloading}
-                className="flex-1"
+                className="flex-1 w-full sm:w-auto"
+                size="sm"
               >
                 {isRetraining ? (
                   <>
@@ -322,6 +324,8 @@ const AdminPage = () => {
                 variant="outline"
                 onClick={handleReloadModel}
                 disabled={isRetraining || isReloading}
+                className="w-full sm:w-auto"
+                size="sm"
               >
                 {isReloading ? (
                   <>

@@ -5,6 +5,9 @@
 
 set -e
 
+# Add Homebrew paths for PostgreSQL tools
+export PATH="/opt/homebrew/bin:/usr/local/bin:$PATH"
+
 echo "=========================================="
 echo "Database Backup Script"
 echo "=========================================="

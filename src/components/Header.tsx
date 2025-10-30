@@ -211,15 +211,24 @@ export const Header = () => {
 
             {/* Mobile Navigation */}
             <nav className="flex flex-col gap-2">
-              <a href="#" className="text-sm font-medium text-foreground hover:text-primary transition-colors py-2">
+              <button 
+                onClick={() => {
+                  navigate("/");
+                  setMobileMenuOpen(false);
+                }}
+                className="text-sm font-medium text-foreground hover:text-primary transition-colors py-2 text-left"
+              >
                 Home
-              </a>
-              <a href="#categories" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors py-2">
-                Categories
-              </a>
-              <a href="#deals" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors py-2">
-                Deals
-              </a>
+              </button>
+              <button 
+                onClick={() => {
+                  navigate("/profile");
+                  setMobileMenuOpen(false);
+                }}
+                className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors py-2 text-left"
+              >
+                Profile
+              </button>
             </nav>
 
             {isAuthenticated ? (
@@ -227,13 +236,27 @@ export const Header = () => {
                 <div className="text-sm text-muted-foreground text-center">
                   Welcome, {user?.username || user?.profile?.username || 'User'}
                 </div>
-                <Button variant="outline" className="w-full" onClick={logout}>
+                <Button 
+                  variant="outline" 
+                  className="w-full" 
+                  onClick={() => {
+                    logout();
+                    setMobileMenuOpen(false);
+                  }}
+                >
                   <LogOut className="h-4 w-4 mr-2" />
                   Logout
                 </Button>
               </div>
             ) : (
-              <Button variant="outline" className="w-full" onClick={() => navigate("/login")}>
+              <Button 
+                variant="outline" 
+                className="w-full" 
+                onClick={() => {
+                  navigate("/login");
+                  setMobileMenuOpen(false);
+                }}
+              >
                 Login
               </Button>
             )}

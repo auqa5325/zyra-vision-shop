@@ -5,6 +5,9 @@
 
 set -e
 
+# Add Homebrew paths for PostgreSQL tools
+export PATH="/opt/homebrew/bin:/usr/local/bin:$PATH"
+
 if [ $# -eq 0 ]; then
     echo "Usage: $0 <backup_file>"
     echo "Example: $0 backup_zyra_db_20251030_052729.sql"

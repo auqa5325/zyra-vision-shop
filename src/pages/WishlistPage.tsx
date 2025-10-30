@@ -92,22 +92,22 @@ const WishlistPage = () => {
       <Header />
       
       <main className="flex-1">
-        <div className="container px-4 py-8">
+        <div className="container px-4 py-4 sm:py-6 lg:py-8">
           {/* Header */}
-          <div className="flex items-center justify-between mb-8">
-            <div className="flex items-center gap-4">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4 mb-6 sm:mb-8">
+            <div className="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4">
               <Button 
                 variant="ghost" 
                 size="sm" 
                 onClick={() => navigate("/")}
-                className="flex items-center gap-2"
+                className="flex items-center gap-2 w-fit"
               >
                 <ArrowLeft className="w-4 h-4" />
                 Continue Shopping
               </Button>
               <div>
-                <h1 className="text-3xl font-bold">My Wishlist</h1>
-                <p className="text-muted-foreground">
+                <h1 className="text-2xl sm:text-3xl font-bold">My Wishlist</h1>
+                <p className="text-sm sm:text-base text-muted-foreground">
                   {wishlist.length} {wishlist.length === 1 ? 'item' : 'items'} saved
                 </p>
               </div>
@@ -116,14 +116,15 @@ const WishlistPage = () => {
             <Button 
               variant="outline" 
               onClick={clearWishlist}
-              className="text-destructive hover:text-destructive"
+              className="text-destructive hover:text-destructive w-full sm:w-auto"
+              size="sm"
             >
               Clear All
             </Button>
           </div>
 
           {/* Wishlist Items */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-3 sm:gap-4 lg:gap-6">
             {wishlist.map((item: WishlistItem) => (
               <Card key={item.product_id} className="group hover:shadow-lg transition-shadow">
                 <CardContent className="p-0">
@@ -142,34 +143,34 @@ const WishlistPage = () => {
                     <Button
                       variant="ghost"
                       size="sm"
-                      className="absolute top-2 right-2 bg-background/80 backdrop-blur-sm hover:bg-background"
+                      className="absolute top-1 right-1 sm:top-2 sm:right-2 bg-background/80 backdrop-blur-sm hover:bg-background h-6 w-6 sm:h-8 sm:w-8 p-0"
                       onClick={(e) => {
                         e.stopPropagation();
                         handleRemoveFromWishlist(item.product_id);
                       }}
                     >
-                      <Trash2 className="w-4 h-4 text-destructive" />
+                      <Trash2 className="w-3 h-3 sm:w-4 sm:h-4 text-destructive" />
                     </Button>
                   </div>
 
                   {/* Product Details */}
-                  <div className="p-4">
+                  <div className="p-3 sm:p-4">
                     <h3 
-                      className="font-medium text-lg mb-2 cursor-pointer hover:text-primary line-clamp-2"
+                      className="font-medium text-sm sm:text-base lg:text-lg mb-2 cursor-pointer hover:text-primary line-clamp-2"
                       onClick={() => handleProductClick(item.product_id)}
                     >
                       {item.name}
                     </h3>
                     
-                    <div className="flex items-center justify-between mb-3">
-                    <DiscountPrice 
-                      price={item.price}
-                      discountPercent={item.discount_percent}
-                      size="2xl"
-                      layout="vertical"
-                      alignment="left"
-                    />
-                      <Badge variant="secondary" className="text-xs">
+                    <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-3 gap-2">
+                      <DiscountPrice 
+                        price={item.price}
+                        discountPercent={item.discount_percent}
+                        size="2xl"
+                        layout="vertical"
+                        alignment="left"
+                      />
+                      <Badge variant="secondary" className="text-xs w-fit">
                         <Calendar className="w-3 h-3 mr-1" />
                         {new Date(item.added_at).toLocaleDateString()}
                       </Badge>
@@ -179,9 +180,10 @@ const WishlistPage = () => {
                     <Button 
                       className="w-full" 
                       onClick={() => handleAddToCart(item)}
+                      size="sm"
                     >
-                      <ShoppingCart className="w-4 h-4 mr-2" />
-                      Add to Cart
+                      <ShoppingCart className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
+                      <span className="text-xs sm:text-sm">Add to Cart</span>
                     </Button>
                   </div>
                 </CardContent>
@@ -190,23 +192,24 @@ const WishlistPage = () => {
           </div>
 
           {/* Summary */}
-          <Card className="mt-8">
-            <CardContent className="p-6">
-              <div className="flex items-center justify-between">
+          <Card className="mt-6 sm:mt-8">
+            <CardContent className="p-4 sm:p-6">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                 <div>
-                  <h3 className="text-lg font-semibold">Wishlist Summary</h3>
-                  <p className="text-muted-foreground">
+                  <h3 className="text-base sm:text-lg font-semibold">Wishlist Summary</h3>
+                  <p className="text-sm text-muted-foreground">
                     {wishlist.length} items • Total value: ₹{wishlist.reduce((sum, item) => sum + item.price, 0).toLocaleString()}
                   </p>
                 </div>
                 <Button 
-                  size="lg"
+                  size="sm"
                   onClick={() => {
                     wishlist.forEach(item => handleAddToCart(item));
                     clearWishlist();
                   }}
+                  className="w-full sm:w-auto"
                 >
-                  <ShoppingCart className="w-4 h-4 mr-2" />
+                  <ShoppingCart className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
                   Add All to Cart
                 </Button>
               </div>

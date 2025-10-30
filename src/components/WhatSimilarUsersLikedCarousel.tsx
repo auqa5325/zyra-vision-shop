@@ -57,14 +57,14 @@ export const WhatSimilarUsersLikedCarousel = ({ userId, limit = 8 }: WhatSimilar
         </div>
 
         <div className="relative">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4 lg:gap-6">
             {[...Array(4)].map((_, i) => (
               <div key={i} className="bg-card rounded-xl border overflow-hidden">
                 <div className="aspect-square bg-muted/50 rounded-t-xl animate-pulse"></div>
-                <div className="p-4">
-                  <div className="h-6 bg-muted/50 rounded animate-pulse mb-2"></div>
-                  <div className="h-4 bg-muted/50 rounded animate-pulse mb-3"></div>
-                  <div className="h-8 bg-muted/50 rounded animate-pulse"></div>
+                <div className="p-3 sm:p-4">
+                  <div className="h-4 sm:h-6 bg-muted/50 rounded animate-pulse mb-2"></div>
+                  <div className="h-3 sm:h-4 bg-muted/50 rounded animate-pulse mb-2 sm:mb-3"></div>
+                  <div className="h-6 sm:h-8 bg-muted/50 rounded animate-pulse"></div>
                 </div>
               </div>
             ))}
@@ -88,8 +88,18 @@ export const WhatSimilarUsersLikedCarousel = ({ userId, limit = 8 }: WhatSimilar
             <p className="text-muted-foreground">Recommendations from users like you</p>
           </div>
         </div>
-        <div className="p-8 text-center">
-          <p className="text-muted-foreground">No recommendations available at the moment.</p>
+        
+        <div className="relative bg-gradient-to-br from-primary/5 via-secondary/5 to-background border border-primary/10 rounded-2xl overflow-hidden">
+          <div className="p-8 text-center">
+            <div className="w-16 h-16 mx-auto mb-4 bg-muted/20 rounded-full flex items-center justify-center">
+              <Users className="h-8 w-8 text-muted-foreground" />
+            </div>
+            <h3 className="text-lg font-semibold text-foreground mb-2">No Similar User Recommendations</h3>
+            <p className="text-muted-foreground">
+              We need more data from similar users to provide personalized recommendations. 
+              Keep browsing and interacting with products to help us build better recommendations for you!
+            </p>
+          </div>
         </div>
       </section>
     );
@@ -117,9 +127,9 @@ export const WhatSimilarUsersLikedCarousel = ({ userId, limit = 8 }: WhatSimilar
           }}
           className="w-full"
         >
-          <CarouselContent className="-ml-2 md:-ml-4">
+          <CarouselContent className="-ml-1 sm:-ml-2 md:-ml-4">
             {recommendations.map((product) => (
-              <CarouselItem key={product.product_id} className="pl-2 md:pl-4 md:basis-1/2 lg:basis-1/3 xl:basis-1/4 flex">
+              <CarouselItem key={product.product_id} className="pl-1 sm:pl-2 md:pl-4 basis-1/2 sm:basis-1/3 md:basis-1/2 lg:basis-1/3 xl:basis-1/4 flex">
                 <div className="w-full h-full">
                   <ProductCard product={product} />
                 </div>
