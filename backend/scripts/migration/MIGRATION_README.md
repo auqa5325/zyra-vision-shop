@@ -131,3 +131,6 @@ DATABASE_URL=postgresql+psycopg2://vijaygk:Crestora2025@localhost:5432/zyra_db
 
 Then restart your application.
 
+
+
+

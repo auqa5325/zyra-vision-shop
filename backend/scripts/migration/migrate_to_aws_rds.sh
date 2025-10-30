@@ -109,3 +109,6 @@ echo ""
 echo "Update your .env file with:"
 echo "DATABASE_URL=postgresql+psycopg2://$RDS_USER:$RDS_PASSWORD@$RDS_HOST:$RDS_PORT/$RDS_DATABASE"
 
+
+
+

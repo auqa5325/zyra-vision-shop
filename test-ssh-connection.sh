@@ -63,3 +63,6 @@ else
     echo "   4. Check your current IP: curl -s ifconfig.me"
 fi
 
+
+
+

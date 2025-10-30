@@ -7,27 +7,21 @@ import { componentTagger } from "lovable-tagger";
 export default defineConfig(({ mode }) => ({
   server: {
     host: "::",
-    port: 8081,
+    port: 8080, // Change to 8080 for crestora-hub frontend, or 8081 for zyra-vision-shop
     watch: {
-      // Exclude backend directory and other heavy directories from file watching
+      // Ignore irrelevant or heavy directories/files: backend, python environments, etc.
       ignored: [
-        "**/backend/**",
-        "**/node_modules/**",
-        "**/dist/**",
-        "**/.git/**",
-        "**/__pycache__/**",
-        "**/*.pyc",
-        "**/myvenv*/**",
-        "**/venv*/**",
-        "**/.venv*/**",
-        "**/artifacts/**",
-        "**/logs/**",
-        "**/*.log",
-        "**/coverage/**",
-        "**/.nyc_output/**",
-        "**/tmp/**",
-        "**/temp/**"
-      ]
+        '**/backend/**',
+        '**/myvenv*/**',
+        '**/venv*/**',
+        '**/.venv*/**',
+        '**/__pycache__/**',
+        '**/node_modules/**',
+        '**/dist/**',
+        '**/.git/**',
+        '**/artifacts/**',
+        '**/*.pyc',
+      ],
     }
   },
   plugins: [react(), mode === "development" && componentTagger()].filter(Boolean),
@@ -40,11 +34,9 @@ export default defineConfig(({ mode }) => ({
   optimizeDeps: {
     exclude: ["@vite/client", "@vite/env"]
   },
-  // Build optimizations
   build: {
     rollupOptions: {
       external: (id) => {
-        // Exclude backend files from build
         return id.includes('/backend/') || id.includes('\\backend\\');
       }
     }
