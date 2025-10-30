@@ -30,6 +30,12 @@ __pycache__/
 *.so
 .Python
 
+# Python virtual environments
+myvenv*/
+venv*/
+.venv*/
+env*/
+
 # Build outputs
 dist/
 build/
@@ -60,3 +66,22 @@ backend/uploads/
 .cache/
 pda-mit.pem
 .pem
+
+# ML/AI artifacts and models
+backend/artifacts/
+backend/models/
+*.pkl
+*.joblib
+*.h5
+*.pb
+*.onnx
+
+# Database files
+*.db
+*.sqlite
+*.sqlite3
+
+# Large data files
+*.csv
+*.json
+*.parquet
