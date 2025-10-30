@@ -47,154 +47,215 @@ export const Header = () => {
   }, [refreshCart, refreshWishlist]);
 
   return (
-    <header className="w-full border-b bg-background">
-      <div className="container flex h-16 items-center justify-between px-4">
-        {/* Logo */}
-        <div className="flex items-center gap-8">
-          <div className="flex items-center gap-2 cursor-pointer" onClick={() => navigate("/")}>
-            <div className="h-8 w-8 rounded-lg bg-gradient-to-br from-primary to-secondary" />
-            <span className="text-2xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
-              sandh.ai
-            </span>
+    <>
+      <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+        <div className="container flex h-16 items-center justify-between px-4">
+          {/* Logo */}
+          <div className="flex items-center gap-8">
+            <div className="flex items-center gap-2 cursor-pointer" onClick={() => navigate("/")}>
+              <div className="h-8 w-8 rounded-lg bg-gradient-to-br from-primary to-secondary" />
+              <span className="text-2xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+                sandh.ai
+              </span>
+            </div>
+
+            {/* Desktop Navigation */}
+            <nav className="hidden md:flex items-center gap-6">
+              <button 
+                onClick={() => navigate("/")}
+                className="text-sm font-medium text-foreground hover:text-primary transition-colors"
+              >
+                Home
+              </button>
+              <button 
+                onClick={() => navigate("/profile")}
+                className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors"
+              >
+                Profile
+              </button>
+              <button 
+                onClick={() => navigate("/wishlist")}
+                className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors"
+              >
+                Wishlist
+              </button>
+            </nav>
           </div>
 
-          {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center gap-6">
-            <button 
-              onClick={() => navigate("/")}
-              className="text-sm font-medium text-foreground hover:text-primary transition-colors"
-            >
-              Home
-            </button>
-            <button 
-              onClick={() => navigate("/profile")}
-              className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors"
-            >
-              Profile
-            </button>
-            <button 
+          {/* Search Bar - Desktop */}
+          <div className="hidden md:flex flex-1 max-w-md mx-8">
+            <SearchInput
+              placeholder="Search products..."
+              className="w-full"
+              initialValue={searchQuery}
+              onSearch={(query) => {
+                setSearchQuery(query);
+                navigate(`/search?q=${encodeURIComponent(query)}`);
+              }}
+            />
+          </div>
+
+          {/* Right Actions */}
+          <div className="flex items-center gap-2">
+            {/* Theme Toggle */}
+            <Button variant="ghost" size="icon" onClick={() => setIsDark(!isDark)}>
+              {isDark ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
+            </Button>
+
+            {/* Wishlist */}
+            <Button 
+              variant="ghost" 
+              size="icon" 
+              className="relative"
               onClick={() => navigate("/wishlist")}
-              className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors"
             >
-              Wishlist
-            </button>
-          </nav>
-        </div>
+              <Heart className="h-5 w-5" />
+              {wishlist.length > 0 && (
+                <span className="absolute -top-1 -right-1 h-5 w-5 rounded-full bg-red-500 text-white text-xs flex items-center justify-center font-medium">
+                  {wishlist.length}
+                </span>
+              )}
+            </Button>
 
-        {/* Search Bar - Desktop */}
-        <div className="hidden md:flex flex-1 max-w-md mx-8">
-          <SearchInput
-            placeholder="Search products..."
-            className="w-full"
-            initialValue={searchQuery}
-            onSearch={(query) => {
-              setSearchQuery(query);
-              navigate(`/search?q=${encodeURIComponent(query)}`);
-            }}
-          />
-        </div>
-
-        {/* Right Actions */}
-        <div className="flex items-center gap-2">
-          {/* Theme Toggle */}
-          <Button variant="ghost" size="icon" onClick={() => setIsDark(!isDark)}>
-            {isDark ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
-          </Button>
-
-          {/* Wishlist */}
-          <Button 
-            variant="ghost" 
-            size="icon" 
-            className="relative"
-            onClick={() => navigate("/wishlist")}
-          >
-            <Heart className="h-5 w-5" />
-            {wishlist.length > 0 && (
-              <span className="absolute -top-1 -right-1 h-5 w-5 rounded-full bg-red-500 text-white text-xs flex items-center justify-center font-medium">
-                {wishlist.length}
-              </span>
-            )}
-          </Button>
-
-          {/* Cart */}
-          <Button 
-            variant="ghost" 
-            size="icon" 
-            className="relative"
-            onClick={(e) => {
-              e.preventDefault();
-              e.stopPropagation();
-              navigate("/cart");
-            }}
-          >
-            <ShoppingCart className="h-5 w-5" />
-            {cart.totalItems > 0 && (
-              <span className="absolute -top-1 -right-1 h-5 w-5 rounded-full bg-primary text-primary-foreground text-xs flex items-center justify-center font-medium">
-                {cart.totalItems}
-              </span>
-            )}
-          </Button>
-
-          {/* Profile */}
-          {isAuthenticated ? (
+            {/* Cart */}
             <Button 
               variant="ghost" 
               size="icon" 
-              className="hidden md:flex"
+              className="relative"
               onClick={(e) => {
                 e.preventDefault();
                 e.stopPropagation();
-                navigate("/profile");
+                navigate("/cart");
               }}
             >
-              <User className="h-5 w-5" />
+              <ShoppingCart className="h-5 w-5" />
+              {cart.totalItems > 0 && (
+                <span className="absolute -top-1 -right-1 h-5 w-5 rounded-full bg-primary text-primary-foreground text-xs flex items-center justify-center font-medium">
+                  {cart.totalItems}
+                </span>
+              )}
             </Button>
-          ) : (
-            <Button 
-              variant="ghost" 
-              size="icon" 
-              className="hidden md:flex"
-              onClick={(e) => {
-                e.preventDefault();
-                e.stopPropagation();
-                navigate("/login");
-              }}
-            >
-              <User className="h-5 w-5" />
-            </Button>
-          )}
 
-          {/* Login/Logout Button - Desktop */}
-          {isAuthenticated ? (
-            <div className="hidden md:flex items-center gap-2">
-              <span className="text-sm text-muted-foreground">
-                Welcome, {user?.username || user?.profile?.username || 'User'}
-              </span>
-              <Button variant="outline" onClick={logout}>
-                <LogOut className="h-4 w-4 mr-2" />
-                Logout
+            {/* Profile */}
+            {isAuthenticated ? (
+              <Button 
+                variant="ghost" 
+                size="icon" 
+                className="hidden md:flex"
+                onClick={(e) => {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  navigate("/profile");
+                }}
+              >
+                <User className="h-5 w-5" />
               </Button>
-            </div>
-          ) : (
-            <Button variant="outline" className="hidden md:flex" onClick={() => navigate("/login")}>
-              Login
+            ) : (
+              <Button 
+                variant="ghost" 
+                size="icon" 
+                className="hidden md:flex"
+                onClick={(e) => {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  navigate("/login");
+                }}
+              >
+                <User className="h-5 w-5" />
+              </Button>
+            )}
+
+            {/* Login/Logout Button - Desktop */}
+            {isAuthenticated ? (
+              <div className="hidden md:flex items-center gap-2">
+                <span className="text-sm text-muted-foreground">
+                  Welcome, {user?.username || user?.profile?.username || 'User'}
+                </span>
+                <Button variant="outline" onClick={logout}>
+                  <LogOut className="h-4 w-4 mr-2" />
+                  Logout
+                </Button>
+              </div>
+            ) : (
+              <Button variant="outline" className="hidden md:flex" onClick={() => navigate("/login")}>
+                Login
+              </Button>
+            )}
+
+            {/* Mobile Menu Toggle */}
+            <Button
+              variant="ghost"
+              size="icon"
+              className="md:hidden"
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            >
+              {mobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
             </Button>
-          )}
-
-          {/* Mobile Menu Toggle */}
-          <Button
-            variant="ghost"
-            size="icon"
-            className="md:hidden"
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          >
-            {mobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-          </Button>
+          </div>
         </div>
-      </div>
 
-      {/* Mobile Search Bar - Always visible on mobile */}
-      <div className="md:hidden border-t bg-background px-4 py-3">
+        {/* Mobile Menu */}
+        {mobileMenuOpen && (
+          <div className="md:hidden border-t bg-background p-4 animate-fade-in">
+            <div className="flex flex-col gap-4">
+              {/* Mobile Navigation */}
+              <nav className="flex flex-col gap-2">
+                <button 
+                  onClick={() => {
+                    navigate("/");
+                    setMobileMenuOpen(false);
+                  }}
+                  className="text-sm font-medium text-foreground hover:text-primary transition-colors py-2 text-left"
+                >
+                  Home
+                </button>
+                <button 
+                  onClick={() => {
+                    navigate("/profile");
+                    setMobileMenuOpen(false);
+                  }}
+                  className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors py-2 text-left"
+                >
+                  Profile
+                </button>
+              </nav>
+
+              {isAuthenticated ? (
+                <div className="w-full space-y-2">
+                  <div className="text-sm text-muted-foreground text-center">
+                    Welcome, {user?.username || user?.profile?.username || 'User'}
+                  </div>
+                  <Button 
+                    variant="outline" 
+                    className="w-full" 
+                    onClick={() => {
+                      logout();
+                      setMobileMenuOpen(false);
+                    }}
+                  >
+                    <LogOut className="h-4 w-4 mr-2" />
+                    Logout
+                  </Button>
+                </div>
+              ) : (
+                <Button 
+                  variant="outline" 
+                  className="w-full" 
+                  onClick={() => {
+                    navigate("/login");
+                    setMobileMenuOpen(false);
+                  }}
+                >
+                  Login
+                </Button>
+              )}
+            </div>
+          </div>
+        )}
+      </header>
+
+      {/* Mobile Search Bar - Not sticky, scrolls with content */}
+      <div className="md:hidden border-b bg-background px-4 py-3">
         <SearchInput
           placeholder="Search products..."
           className="w-full"
@@ -205,65 +266,6 @@ export const Header = () => {
           }}
         />
       </div>
-
-      {/* Mobile Menu */}
-      {mobileMenuOpen && (
-        <div className="md:hidden border-t bg-background p-4 animate-fade-in">
-          <div className="flex flex-col gap-4">
-            {/* Mobile Navigation */}
-            <nav className="flex flex-col gap-2">
-              <button 
-                onClick={() => {
-                  navigate("/");
-                  setMobileMenuOpen(false);
-                }}
-                className="text-sm font-medium text-foreground hover:text-primary transition-colors py-2 text-left"
-              >
-                Home
-              </button>
-              <button 
-                onClick={() => {
-                  navigate("/profile");
-                  setMobileMenuOpen(false);
-                }}
-                className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors py-2 text-left"
-              >
-                Profile
-              </button>
-            </nav>
-
-            {isAuthenticated ? (
-              <div className="w-full space-y-2">
-                <div className="text-sm text-muted-foreground text-center">
-                  Welcome, {user?.username || user?.profile?.username || 'User'}
-                </div>
-                <Button 
-                  variant="outline" 
-                  className="w-full" 
-                  onClick={() => {
-                    logout();
-                    setMobileMenuOpen(false);
-                  }}
-                >
-                  <LogOut className="h-4 w-4 mr-2" />
-                  Logout
-                </Button>
-              </div>
-            ) : (
-              <Button 
-                variant="outline" 
-                className="w-full" 
-                onClick={() => {
-                  navigate("/login");
-                  setMobileMenuOpen(false);
-                }}
-              >
-                Login
-              </Button>
-            )}
-          </div>
-        </div>
-      )}
-    </header>
+    </>
   );
 };
