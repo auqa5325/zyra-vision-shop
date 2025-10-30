@@ -193,22 +193,23 @@ export const Header = () => {
         </div>
       </div>
 
+      {/* Mobile Search Bar - Always visible on mobile */}
+      <div className="md:hidden border-t bg-background px-4 py-3">
+        <SearchInput
+          placeholder="Search products..."
+          className="w-full"
+          initialValue={mobileSearchQuery}
+          onSearch={(query) => {
+            setMobileSearchQuery(query);
+            navigate(`/search?q=${encodeURIComponent(query)}`);
+          }}
+        />
+      </div>
+
       {/* Mobile Menu */}
       {mobileMenuOpen && (
         <div className="md:hidden border-t bg-background p-4 animate-fade-in">
           <div className="flex flex-col gap-4">
-            {/* Mobile Search */}
-            <SearchInput
-              placeholder="Search products..."
-              className="w-full"
-              initialValue={mobileSearchQuery}
-              onSearch={(query) => {
-                setMobileSearchQuery(query);
-                navigate(`/search?q=${encodeURIComponent(query)}`);
-                setMobileMenuOpen(false);
-              }}
-            />
-
             {/* Mobile Navigation */}
             <nav className="flex flex-col gap-2">
               <button 

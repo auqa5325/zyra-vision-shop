@@ -111,12 +111,12 @@ export const ProductCard = ({ product }: ProductCardProps) => {
         {/* AI Score Badge for Collaborative Filtering and Hybrid Recommendations - Top Left */}
         {((product.reason_features?.cf_score && product.reason_features?.source === "collaborative") ||
           (product.reason_features?.hybrid && product.reason_features?.source?.startsWith("hybrid"))) && (
-          <div className="absolute top-2 left-2 z-10 max-w-[calc(100%-4rem)]">
+          <div className="absolute top-1 left-1 sm:top-2 sm:left-2 z-10 max-w-[calc(100%-2rem)] sm:max-w-[calc(100%-4rem)]">
             <Badge 
               variant="default" 
-              className="bg-gradient-to-r from-primary to-purple-600 text-white border-0 shadow-lg flex items-center gap-1 text-[10px] sm:text-xs px-2 sm:px-2.5 py-0.5 sm:py-1 whitespace-nowrap"
+              className="bg-gradient-to-r from-primary to-purple-600 text-white border-0 shadow-lg flex items-center gap-0.5 sm:gap-1 text-[9px] sm:text-xs px-1.5 sm:px-2.5 py-0.5 sm:py-1 whitespace-nowrap"
             >
-              <Sparkles className="h-2.5 w-2.5 sm:h-3 sm:w-3 flex-shrink-0" />
+              <Sparkles className="h-2 w-2 sm:h-3 sm:w-3 flex-shrink-0" />
               <span className="truncate">
                 AI: {Math.round(
                   (product.reason_features?.hybrid && product.reason_features?.hybrid_score)
@@ -128,19 +128,16 @@ export const ProductCard = ({ product }: ProductCardProps) => {
           </div>
         )}
         
-        {/* Wishlist Button - Bottom Left (to avoid overlap with AI badge) */}
+        {/* Wishlist Button - Top Right (moved to avoid overlap) */}
         <TooltipProvider>
           <Tooltip>
             <TooltipTrigger asChild>
               <button 
-                className={`absolute ${((product.reason_features?.cf_score && product.reason_features?.source === "collaborative") ||
-                  (product.reason_features?.hybrid && product.reason_features?.source?.startsWith("hybrid"))) 
-                  ? "bottom-2 left-2" 
-                  : "top-2 left-2"} p-2 bg-background/80 backdrop-blur-sm rounded-full hover:bg-background transition-colors z-10`}
+                className="absolute top-1 right-1 sm:top-2 sm:right-2 p-1.5 sm:p-2 bg-background/80 backdrop-blur-sm rounded-full hover:bg-background transition-colors z-10"
                 onClick={handleWishlistToggle}
               >
                 <Heart 
-                  className={`h-4 w-4 transition-colors ${
+                  className={`h-3 w-3 sm:h-4 sm:w-4 transition-colors ${
                     isWishlisted 
                       ? "fill-red-500 text-red-500" 
                       : "text-muted-foreground hover:text-red-500"
@@ -148,23 +145,23 @@ export const ProductCard = ({ product }: ProductCardProps) => {
                 />
               </button>
             </TooltipTrigger>
-            <TooltipContent side="right">
-              <p>{isWishlisted ? "Remove from wishlist" : "Add to wishlist"}</p>
+            <TooltipContent side="left">
+              <p className="text-xs">{isWishlisted ? "Remove from wishlist" : "Add to wishlist"}</p>
             </TooltipContent>
           </Tooltip>
         </TooltipProvider>
 
-        {/* Info Button - Top Right */}
+        {/* Info Button - Bottom Right (moved to avoid overlap) */}
         {product.reason_features && (
           <TooltipProvider>
             <Tooltip>
               <TooltipTrigger asChild>
-                <button className="absolute top-2 right-2 p-2 bg-background/80 backdrop-blur-sm rounded-full hover:bg-background transition-colors z-10">
-                  <Info className="h-4 w-4 text-primary" />
+                <button className="absolute bottom-1 right-1 sm:bottom-2 sm:right-2 p-1.5 sm:p-2 bg-background/80 backdrop-blur-sm rounded-full hover:bg-background transition-colors z-10">
+                  <Info className="h-3 w-3 sm:h-4 sm:w-4 text-primary" />
                 </button>
               </TooltipTrigger>
               <TooltipContent side="left" className="max-w-xs">
-                <p className="font-semibold mb-1">Why this?</p>
+                <p className="font-semibold mb-1 text-sm">Why this?</p>
                 {product.reason_features.matched_tags && (
                   <p className="text-xs text-muted-foreground">
                     Matches: {product.reason_features.matched_tags.join(", ")}
@@ -182,22 +179,22 @@ export const ProductCard = ({ product }: ProductCardProps) => {
       </div>
 
       {/* Product Info */}
-      <div className="p-4 flex flex-col flex-grow">
-        <h3 className="font-semibold text-foreground mb-1 line-clamp-2 min-h-[3rem] group-hover:text-primary transition-colors">
+      <div className="p-3 sm:p-4 flex flex-col flex-grow">
+        <h3 className="font-semibold text-foreground mb-1 line-clamp-2 min-h-[2.5rem] sm:min-h-[3rem] group-hover:text-primary transition-colors text-sm sm:text-base">
           {product.name}
         </h3>
-        <p className="text-sm text-muted-foreground mb-3 line-clamp-2 min-h-[2.5rem]">
+        <p className="text-xs sm:text-sm text-muted-foreground mb-2 sm:mb-3 line-clamp-2 min-h-[2rem] sm:min-h-[2.5rem]">
           {product.description || "\u00A0"}
         </p>
 
         {/* Rating */}
-        <div className="flex items-center gap-2 mb-3 min-h-[1.5rem]">
+        <div className="flex items-center gap-1 sm:gap-2 mb-2 sm:mb-3 min-h-[1.25rem] sm:min-h-[1.5rem]">
           {(product.average_rating !== undefined || product.rating !== undefined) && (
             <>
               <div className="flex gap-0.5">
                 {renderStars(product.average_rating ?? product.rating ?? 0)}
               </div>
-              <span className="text-sm text-muted-foreground">
+              <span className="text-xs sm:text-sm text-muted-foreground">
                 ({((product.average_rating ?? product.rating) || 0).toFixed(1)})
                 {product.total_reviews !== undefined && product.total_reviews > 0 && (
                   <span className="ml-1">({product.total_reviews})</span>
@@ -208,7 +205,7 @@ export const ProductCard = ({ product }: ProductCardProps) => {
         </div>
 
         {/* Price and CTA */}
-        <div className="flex items-center justify-between mt-auto">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between mt-auto gap-2 sm:gap-0">
           <DiscountPrice 
             price={product.price}
             discountPercent={product.discount_percent}
@@ -220,11 +217,12 @@ export const ProductCard = ({ product }: ProductCardProps) => {
           <Button 
             size="sm" 
             variant="gradient" 
-            className="gap-2 flex-shrink-0"
+            className="gap-1 sm:gap-2 flex-shrink-0 w-full sm:w-auto text-xs sm:text-sm"
             onClick={handleAddToCart}
           >
-            <ShoppingCart className="h-4 w-4" />
-            Add
+            <ShoppingCart className="h-3 w-3 sm:h-4 sm:w-4" />
+            <span className="hidden sm:inline">Add</span>
+            <span className="sm:hidden">Add to Cart</span>
           </Button>
         </div>
       </div>

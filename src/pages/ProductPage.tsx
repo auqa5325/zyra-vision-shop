@@ -179,17 +179,18 @@ const ProductPage = () => {
       <Header />
       
       <main className="flex-1">
-        <div className="container px-4 py-8">
+        <div className="container px-4 py-4 sm:py-6 lg:py-8">
           <Button
             variant="ghost"
             onClick={() => navigate("/")}
-            className="mb-6"
+            className="mb-4 sm:mb-6"
+            size="sm"
           >
             <ArrowLeft className="w-4 h-4 mr-2" />
             Back to Home
           </Button>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-12">
             {/* Product Image */}
             <div className="relative aspect-square rounded-xl overflow-hidden bg-muted/30">
               <img
@@ -203,20 +204,20 @@ const ProductPage = () => {
             <div className="flex flex-col">
               <div className="mb-4">
                 {product.category && (
-                  <Badge variant="secondary" className="mb-2">
+                  <Badge variant="secondary" className="mb-2 text-xs sm:text-sm">
                     {product.category}
                   </Badge>
                 )}
-                <h1 className="text-3xl lg:text-4xl font-bold text-foreground mb-4">
+                <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-foreground mb-3 sm:mb-4">
                   {product.name}
                 </h1>
                 
                 {(product.average_rating !== undefined || product.rating !== undefined) && (
-                  <div className="flex items-center gap-2 mb-4">
+                  <div className="flex items-center gap-2 mb-3 sm:mb-4">
                     <div className="flex gap-1">
                       {renderStars(product.average_rating ?? product.rating ?? 0)}
                     </div>
-                    <span className="text-sm text-muted-foreground">
+                    <span className="text-xs sm:text-sm text-muted-foreground">
                       {((product.average_rating ?? product.rating) || 0).toFixed(1)} out of 5
                       {product.total_reviews !== undefined && product.total_reviews > 0 && (
                         <span className="ml-1">({product.total_reviews} reviews)</span>
@@ -226,28 +227,28 @@ const ProductPage = () => {
                 )}
               </div>
 
-              <p className="text-lg text-muted-foreground mb-6">
+              <p className="text-sm sm:text-base lg:text-lg text-muted-foreground mb-4 sm:mb-6">
                 {product.description}
               </p>
 
               {user && userItemSimilarity > 0 && (
-                <div className="mb-6">
+                <div className="mb-4 sm:mb-6">
                   <Badge 
                     variant="default" 
-                    className="bg-gradient-to-r from-primary to-purple-600 text-white border-0 shadow-lg text-sm sm:text-base px-3 sm:px-4 py-1.5 sm:py-2 flex items-center gap-1.5 sm:gap-2 w-fit"
+                    className="bg-gradient-to-r from-primary to-purple-600 text-white border-0 shadow-lg text-xs sm:text-sm px-2 sm:px-3 py-1 sm:py-1.5 flex items-center gap-1 sm:gap-1.5 w-fit"
                   >
-                    <Sparkles className="h-3.5 w-3.5 sm:h-4 sm:w-4 flex-shrink-0" />
+                    <Sparkles className="h-3 w-3 sm:h-3.5 sm:w-3.5 flex-shrink-0" />
                     <span>AI Score: {Math.round(userItemSimilarity * 100)}%</span>
                   </Badge>
                 </div>
               )}
               
               {product.reason_features && product.reason_features.matched_tags && product.reason_features.matched_tags.length > 0 && (
-                <div className="bg-muted/30 rounded-lg p-4 mb-6">
-                  <h3 className="font-semibold mb-2 text-foreground">Why we recommend this</h3>
-                  <div className="flex flex-wrap gap-2">
+                <div className="bg-muted/30 rounded-lg p-3 sm:p-4 mb-4 sm:mb-6">
+                  <h3 className="font-semibold mb-2 text-foreground text-sm sm:text-base">Why we recommend this</h3>
+                  <div className="flex flex-wrap gap-1 sm:gap-2">
                     {product.reason_features.matched_tags.map((tag) => (
-                      <Badge key={tag} variant="outline">
+                      <Badge key={tag} variant="outline" className="text-xs">
                         {tag}
                       </Badge>
                     ))}
@@ -256,8 +257,8 @@ const ProductPage = () => {
               )}
 
               <div className="mt-auto">
-                <div className="mb-6">
-                  <p className="text-sm text-muted-foreground mb-1">Price</p>
+                <div className="mb-4 sm:mb-6">
+                  <p className="text-xs sm:text-sm text-muted-foreground mb-1">Price</p>
                   <DiscountPrice 
                     price={product.price}
                     discountPercent={product.discount_percent}
@@ -268,68 +269,75 @@ const ProductPage = () => {
                 </div>
 
                 {/* Quantity Controls */}
-                <div className="mb-4">
-                  <p className="text-sm text-muted-foreground mb-2">Quantity</p>
-                  <div className="flex items-center gap-3">
+                <div className="mb-3 sm:mb-4">
+                  <p className="text-xs sm:text-sm text-muted-foreground mb-2">Quantity</p>
+                  <div className="flex items-center gap-2 sm:gap-3">
                     <Button
                       variant="outline"
                       size="sm"
                       onClick={() => handleQuantityChange(quantity - 1)}
                       disabled={quantity <= 1}
+                      className="h-8 w-8 sm:h-9 sm:w-9 p-0"
                     >
-                      <Minus className="w-4 h-4" />
+                      <Minus className="w-3 h-3 sm:w-4 sm:h-4" />
                     </Button>
-                    <div className="w-16 text-center">
-                      <span className="text-lg font-semibold">{quantity}</span>
+                    <div className="w-12 sm:w-16 text-center">
+                      <span className="text-base sm:text-lg font-semibold">{quantity}</span>
                     </div>
                     <Button
                       variant="outline"
                       size="sm"
                       onClick={() => handleQuantityChange(quantity + 1)}
                       disabled={quantity >= 10}
+                      className="h-8 w-8 sm:h-9 sm:w-9 p-0"
                     >
-                      <Plus className="w-4 h-4" />
+                      <Plus className="w-3 h-3 sm:w-4 sm:h-4" />
                     </Button>
                   </div>
                 </div>
 
                 {/* Cart Status */}
                 {currentCartQuantity > 0 && (
-                  <div className="mb-4 p-3 bg-blue-50 border border-blue-200 rounded-lg">
-                    <p className="text-sm text-blue-700">
-                      <ShoppingCart className="w-4 h-4 inline mr-1" />
+                  <div className="mb-3 sm:mb-4 p-2 sm:p-3 bg-blue-50 border border-blue-200 rounded-lg">
+                    <p className="text-xs sm:text-sm text-blue-700">
+                      <ShoppingCart className="w-3 h-3 sm:w-4 sm:h-4 inline mr-1" />
                       {currentCartQuantity} {currentCartQuantity === 1 ? 'item' : 'items'} in cart
                     </p>
                     <Button 
                       variant="link" 
                       size="sm" 
                       onClick={handleGoToCart}
-                      className="p-0 h-auto text-blue-600 hover:text-blue-700"
+                      className="p-0 h-auto text-blue-600 hover:text-blue-700 text-xs sm:text-sm"
                     >
                       View Cart
                     </Button>
                   </div>
                 )}
 
-                <Button size="lg" className="w-full" variant="gradient" onClick={handleAddToCart}>
-                  <ShoppingCart className="w-5 h-5 mr-2" />
+                <Button size="sm" className="w-full" variant="gradient" onClick={handleAddToCart}>
+                  <ShoppingCart className="w-4 h-4 mr-2" />
                   Add to Cart
                 </Button>
                 
                 <Button 
-                  size="lg" 
+                  size="sm" 
                   variant="outline" 
-                  className="w-full mt-3"
+                  className="w-full mt-2 sm:mt-3"
                   onClick={handleWishlistToggle}
                 >
                   <Heart 
-                    className={`w-5 h-5 mr-2 ${
+                    className={`w-4 h-4 mr-2 ${
                       product && isInWishlist(product.product_id)
                         ? "fill-red-500 text-red-500" 
                         : "text-muted-foreground"
                     }`} 
                   />
-                  {product && isInWishlist(product.product_id) ? "Remove from Wishlist" : "Add to Wishlist"}
+                  <span className="hidden sm:inline">
+                    {product && isInWishlist(product.product_id) ? "Remove from Wishlist" : "Add to Wishlist"}
+                  </span>
+                  <span className="sm:hidden">
+                    {product && isInWishlist(product.product_id) ? "Remove" : "Wishlist"}
+                  </span>
                 </Button>
               </div>
             </div>
@@ -345,9 +353,9 @@ const ProductPage = () => {
 
           {/* Similar Products Section */}
           {similarProducts.length > 0 && (
-            <section className="mt-16">
-              <h2 className="text-2xl font-bold text-foreground mb-6">You might also like</h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <section className="mt-12 sm:mt-16">
+              <h2 className="text-xl sm:text-2xl font-bold text-foreground mb-4 sm:mb-6">You might also like</h2>
+              <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4 lg:gap-6">
                 {similarProducts.map((similarProduct) => (
                   <div
                     key={similarProduct.product_id}
@@ -361,15 +369,15 @@ const ProductPage = () => {
                         className="w-full h-full object-cover"
                       />
                     </div>
-                    <div className="p-4">
-                      <h3 className="font-semibold text-foreground mb-2 line-clamp-2">
+                    <div className="p-3 sm:p-4">
+                      <h3 className="font-semibold text-foreground mb-2 line-clamp-2 text-sm sm:text-base">
                         {similarProduct.name}
                       </h3>
                       <div className="flex items-center gap-2 mb-2">
                         <div className="flex gap-1">
                           {renderStars(similarProduct.average_rating ?? similarProduct.rating ?? 0)}
                         </div>
-                        <span className="text-sm text-muted-foreground">
+                        <span className="text-xs sm:text-sm text-muted-foreground">
                           {((similarProduct.average_rating ?? similarProduct.rating) || 0).toFixed(1)}
                         </span>
                       </div>

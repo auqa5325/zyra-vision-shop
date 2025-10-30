@@ -268,22 +268,23 @@ const SearchResults = () => {
       <Header />
       
       <main className="flex-1">
-        <div className="container px-4 py-8">
+        <div className="container px-4 py-4 sm:py-6 lg:py-8">
           {/* Search Header */}
-          <div className="mb-8">
-            <div className="flex items-center gap-4 mb-6">
+          <div className="mb-6 sm:mb-8">
+            <div className="flex items-center gap-3 sm:gap-4 mb-4 sm:mb-6">
               <Button 
                 variant="ghost" 
                 onClick={handleBackToHome}
                 className="flex items-center gap-2"
+                size="sm"
               >
                 <ArrowLeft className="h-4 w-4" />
                 Back to Home
               </Button>
             </div>
 
-            {/* Search Bar */}
-            <div className="max-w-2xl">
+            {/* Search Bar - Hidden on mobile since it's now in header */}
+            <div className="max-w-2xl hidden md:block">
               <SearchInput
                 placeholder="Search products..."
                 className="w-full"
@@ -306,21 +307,21 @@ const SearchResults = () => {
 
             {/* Search Results Info and Controls */}
             {currentQuery && (
-              <div className="mt-4">
-                <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4 mb-6">
+              <div className="mt-3 sm:mt-4">
+                <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-3 sm:gap-4 mb-4 sm:mb-6">
                   {/* Search Results Info */}
                   <div className="flex-1">
-                    <h1 className="text-2xl font-bold text-foreground">
+                    <h1 className="text-xl sm:text-2xl font-bold text-foreground">
                       Search Results for "{currentQuery}"
                     </h1>
-                    <p className="text-muted-foreground mt-2">
+                    <p className="text-sm sm:text-base text-muted-foreground mt-1 sm:mt-2">
                       {filteredAndSortedResults.length} of {searchResults.length} product{searchResults.length !== 1 ? 's' : ''} found
                     </p>
                   </div>
 
                   {/* Filter and Sort Controls */}
                   {searchResults.length > 0 && (
-                    <div className="flex flex-col sm:flex-row gap-3 items-start sm:items-center">
+                    <div className="flex flex-col sm:flex-row gap-2 sm:gap-3 items-stretch sm:items-center">
                       <FilterModal
                         onApplyFilters={applyFilters}
                         onClearFilters={clearFilters}
@@ -341,7 +342,7 @@ const SearchResults = () => {
                 
                 {/* Active Filters Display */}
                 {(filters.brands.length > 0 || filters.subcategories.length > 0 || filters.minRating > 0 || filters.inStock) && (
-                  <div className="flex flex-wrap gap-2 mb-6">
+                  <div className="flex flex-wrap gap-1 sm:gap-2 mb-4 sm:mb-6">
                     {filters.brands.map(brand => (
                       <span key={brand} className="inline-flex items-center px-2 py-1 rounded-full text-xs bg-primary/10 text-primary">
                         {brand}
@@ -373,64 +374,68 @@ const SearchResults = () => {
 
           {/* Search Results */}
           {!currentQuery ? (
-            <div className="text-center py-12">
-              <Search className="h-16 w-16 text-muted-foreground mx-auto mb-4" />
-              <h2 className="text-xl font-semibold text-foreground mb-2">
+            <div className="text-center py-8 sm:py-12">
+              <Search className="h-12 w-12 sm:h-16 sm:w-16 text-muted-foreground mx-auto mb-3 sm:mb-4" />
+              <h2 className="text-lg sm:text-xl font-semibold text-foreground mb-2">
                 Start searching for products
               </h2>
-              <p className="text-muted-foreground">
+              <p className="text-sm sm:text-base text-muted-foreground">
                 Enter a search term above to find products
               </p>
             </div>
           ) : searchResults.length === 0 ? (
-            <div className="text-center py-12">
-              <Search className="h-16 w-16 text-muted-foreground mx-auto mb-4" />
-              <h2 className="text-xl font-semibold text-foreground mb-2">
+            <div className="text-center py-8 sm:py-12">
+              <Search className="h-12 w-12 sm:h-16 sm:w-16 text-muted-foreground mx-auto mb-3 sm:mb-4" />
+              <h2 className="text-lg sm:text-xl font-semibold text-foreground mb-2">
                 No products found
               </h2>
-              <p className="text-muted-foreground mb-4">
+              <p className="text-sm sm:text-base text-muted-foreground mb-3 sm:mb-4">
                 Try searching with different keywords or check your spelling
               </p>
               <div className="flex flex-wrap gap-2 justify-center">
                 <Button 
                   variant="outline" 
                   onClick={() => setSearchQuery("electronics")}
+                  size="sm"
                 >
                   Try "electronics"
                 </Button>
                 <Button 
                   variant="outline" 
                   onClick={() => setSearchQuery("clothing")}
+                  size="sm"
                 >
                   Try "clothing"
                 </Button>
                 <Button 
                   variant="outline" 
                   onClick={() => setSearchQuery("accessories")}
+                  size="sm"
                 >
                   Try "accessories"
                 </Button>
               </div>
             </div>
           ) : filteredAndSortedResults.length === 0 ? (
-            <div className="text-center py-12">
-              <Search className="h-16 w-16 text-muted-foreground mx-auto mb-4" />
-              <h2 className="text-xl font-semibold text-foreground mb-2">
+            <div className="text-center py-8 sm:py-12">
+              <Search className="h-12 w-12 sm:h-16 sm:w-16 text-muted-foreground mx-auto mb-3 sm:mb-4" />
+              <h2 className="text-lg sm:text-xl font-semibold text-foreground mb-2">
                 No products match your filters
               </h2>
-              <p className="text-muted-foreground mb-4">
+              <p className="text-sm sm:text-base text-muted-foreground mb-3 sm:mb-4">
                 Try adjusting your filters or clearing them to see more results
               </p>
               <Button 
                 variant="outline" 
                 onClick={clearFilters}
-                className="mt-4"
+                className="mt-3 sm:mt-4"
+                size="sm"
               >
                 Clear Filters
               </Button>
             </div>
           ) : (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-4 lg:gap-6">
               {filteredAndSortedResults.map((product: Product) => (
                 <ProductCard key={product.product_id} product={product} />
               ))}
