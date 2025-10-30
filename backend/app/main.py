@@ -53,6 +53,7 @@ app.add_middleware(
         "http://localhost:3000",  # Common React dev port
         "http://localhost:5173",
         "http://3.110.143.60:8080",
+        "http://13.127.109.143:8081",
     ],
     allow_credentials=True,
     allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"],
