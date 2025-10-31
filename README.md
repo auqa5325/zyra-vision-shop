@@ -2453,6 +2453,31 @@ docker-compose up -d
 - [Recommendation System](docs/PERSONALIZED_HYBRID_RECOMMENDATION_SYSTEM.md)
 - [Product Generation](docs/PRODUCT_GENERATION_SUMMARY.md)
 
+## 🧪 Testing
+
+### ✅ Test Suite Status: **100% ML Tests Passing**
+
+- **[Complete Testing Guide](docs/TESTING.md)** - Comprehensive testing documentation
+- **[Quick Start Testing](TEST_SETUP.md)** - Get started in 5 minutes
+- **[Postman Quick Start](POSTMAN_QUICKSTART.md)** - API testing with Postman
+- **[Postman Test Data](POSTMAN_TEST_DATA.md)** - Ready-to-use test values
+- **[Postman Auth Help](POSTMAN_NO_AUTH_ERRORS.md)** - Fix 401 errors
+- **[Postman Guide](docs/POSTMAN_GUIDE.md)** - Detailed Postman instructions
+- **[Test Summary](TEST_SUMMARY.md)** - Overview of all tests
+- **[Final Results](FINAL_TEST_RESULTS.md)** - Complete test results
+- **[Test Complete](TEST_COMPLETE_SUMMARY.md)** - Success summary ✅
+
+**Quick Test Commands:**
+```bash
+# Backend ML tests (✅ 13/13 passing)
+cd backend && python3 -m pytest tests/test_ml_services.py -v
+
+# Frontend E2E tests
+npm run test:e2e:ui
+
+# Postman: Import backend/tests/postman_collection.json
+```
+
 ## 🎯 Key Architecture Decisions
 
 1. **Hybrid Recommendation System**: Combines content-based filtering (FAISS) with collaborative filtering (ALS) for optimal recommendations

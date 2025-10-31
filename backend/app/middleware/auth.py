@@ -27,9 +27,7 @@ class JWTAuthMiddleware(BaseHTTPMiddleware):
             "/api/auth/logout",  # Logout endpoint
             "/static/uploads",  # Local image serving
             "/api/images/proxy",  # Image proxy
-            "/api/interactions/test",  # Test endpoint
-            "/api/chatbot/health",  # Chatbot health check
-            "/api/chatbot/chat"  # Chatbot chat endpoint
+            "/api/interactions/test"  # Test endpoint
         }
         # Public path patterns (for endpoints that start with these)
         self.public_patterns = [
@@ -37,7 +35,8 @@ class JWTAuthMiddleware(BaseHTTPMiddleware):
             "/api/recommendations",
             "/api/images",
             "/api/user-data",
-            "/api/user-states"
+            "/api/user-states",
+            "/api/chatbot"  # All chatbot endpoints are public (accessible to logged in and logged out users)
         ]
     
     async def dispatch(self, request: Request, call_next):

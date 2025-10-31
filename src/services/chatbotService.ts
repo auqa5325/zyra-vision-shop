@@ -39,6 +39,13 @@ class ChatbotService {
       return response;
     } catch (error) {
       console.error('❌ [CHATBOT] API error:', error);
+      
+      // Check for rate limit errors
+      const errorMessage = error instanceof Error ? error.message : String(error);
+      if (errorMessage.includes('429') || errorMessage.includes('rate limit') || errorMessage.includes('quota')) {
+        throw new Error('Rate limit exceeded. The chat service is temporarily unavailable. Please try again in a few moments.');
+      }
+      
       throw new Error('Failed to get response from chatbot');
     }
   }
@@ -69,7 +76,16 @@ class ChatbotService {
   /**
    * Get error message for when chatbot is unavailable
    */
-  getErrorMessage(): ChatMessage {
+  getErrorMessage(error?: Error): ChatMessage {
+    const errorMsg = error?.message || '';
+    
+    if (errorMsg.includes('rate limit') || errorMsg.includes('quota') || errorMsg.includes('429')) {
+      return {
+        role: 'assistant',
+        content: "⚠️ I'm experiencing high demand right now. Please wait a moment and try again, or feel free to browse our products manually."
+      };
+    }
+    
     return {
       role: 'assistant',
       content: "I'm sorry, I'm having trouble connecting right now. Please try again in a moment, or feel free to browse our products manually."

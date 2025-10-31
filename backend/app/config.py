@@ -42,6 +42,7 @@ class Settings(BaseSettings):
     
     # Gemini AI
     gemini_api_key: Optional[str] = None
+    gemini_model: str = "gemini-2.5-flash-lite"  # Default model: Gemini 2.5 Flash Lite (most cost-efficient)
     
     def get_database_url(self) -> str:
         """Get database URL, building from components if needed"""

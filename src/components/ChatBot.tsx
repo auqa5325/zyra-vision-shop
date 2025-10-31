@@ -120,10 +120,11 @@ export const ChatBot = () => {
       
     } catch (error) {
       console.error('❌ [CHATBOT] Error:', error);
+      const errorObj = error instanceof Error ? error : new Error(String(error));
       const errorMessage: Message = {
         id: (Date.now() + 1).toString(),
         role: "assistant",
-        content: chatbotService.getErrorMessage().content,
+        content: chatbotService.getErrorMessage(errorObj).content,
       };
       setMessages((prev) => [...prev, errorMessage]);
     } finally {

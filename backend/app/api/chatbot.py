@@ -10,6 +10,10 @@ import os
 import logging
 import re
 from uuid import UUID
+try:
+    import httpx
+except ImportError:
+    httpx = None  # Will handle gracefully if not available
 
 from app.database import get_db
 from app.models import Product
@@ -21,9 +25,10 @@ router = APIRouter(prefix="/api/chatbot", tags=["chatbot"])
 
 # Configure Gemini
 GEMINI_API_KEY = settings.gemini_api_key
+GEMINI_MODEL = settings.gemini_model
 if GEMINI_API_KEY:
     genai.configure(api_key=GEMINI_API_KEY)
-    logger.info("✅ Gemini API configured successfully")
+    logger.info(f"✅ Gemini API configured successfully with model: {GEMINI_MODEL}")
 else:
     logger.warning("GEMINI_API_KEY not found in environment variables")
 
@@ -240,7 +245,7 @@ async def chat_with_gemini(
         for msg in request.messages[-10:]:
             conversation_text += f"\n{msg.role}: {msg.content}"
 
-        model = genai.GenerativeModel('gemini-pro-latest')
+        model = genai.GenerativeModel(GEMINI_MODEL)
         response = model.generate_content(conversation_text)
         
         # Generate suggestions based on response
@@ -265,16 +270,136 @@ async def chat_with_gemini(
         )
         
     except Exception as e:
-        logger.error(f"Gemini API error: {str(e)}")
-        raise HTTPException(status_code=500, detail=f"Chat service error: {str(e)}")
+        error_msg = str(e)
+        logger.error(f"Gemini API error: {error_msg}")
+        
+        # Handle rate limit errors specifically
+        if "429" in error_msg or "quota" in error_msg.lower() or "rate limit" in error_msg.lower():
+            logger.warning("⚠️ Gemini API rate limit exceeded")
+            raise HTTPException(
+                status_code=429,
+                detail="Chat service is temporarily unavailable due to rate limits. Please try again in a few moments."
+            )
+        
+        # Handle other API errors
+        raise HTTPException(
+            status_code=500,
+            detail=f"Chat service error: {error_msg}"
+        )
 
 @router.get("/health")
 async def chatbot_health():
+    """Health check endpoint - checks configuration without making API calls"""
     if not GEMINI_API_KEY:
-        return {"status": "unhealthy", "gemini_accessible": False, "error": "API key not configured"}
+        return {
+            "status": "unhealthy",
+            "gemini_accessible": False,
+            "model": GEMINI_MODEL,
+            "error": "API key not configured"
+        }
+    
+    # Return healthy if API key is configured
+    # We don't make actual API calls here to avoid wasting quota
+    # The actual API call will happen on /chat endpoint if needed
+    return {
+        "status": "healthy",
+        "gemini_accessible": True,
+        "model": GEMINI_MODEL,
+        "note": "Health check validates configuration only. Actual API connectivity is tested on chat requests."
+    }
+
+@router.get("/models")
+async def list_available_models():
+    """List all available Gemini models from the API"""
+    if not GEMINI_API_KEY:
+        raise HTTPException(
+            status_code=400,
+            detail="Gemini API key not configured. Cannot list available models."
+        )
+    
     try:
-        model = genai.GenerativeModel('gemini-pro-latest')
-        test_response = model.generate_content("Hello")
-        return {"status": "healthy", "gemini_accessible": True}
+        if httpx is None:
+            raise HTTPException(
+                status_code=500,
+                detail="httpx is required to fetch models. Please install it: pip install httpx"
+            )
+        
+        # Fetch models from Google's API
+        api_url = "https://generativelanguage.googleapis.com/v1beta/models"
+        headers = {
+            "x-goog-api-key": GEMINI_API_KEY
+        }
+        
+        async with httpx.AsyncClient(timeout=10.0) as client:
+            response = await client.get(api_url, headers=headers)
+            response.raise_for_status()
+            data = response.json()
+        
+        # Parse and organize models
+        models = data.get("models", [])
+        
+        # Categorize models
+        chat_models = []
+        specialized_models = []
+        
+        for model in models:
+            model_name = model.get("name", "").replace("models/", "")
+            display_name = model.get("displayName", model_name)
+            supported_methods = model.get("supportedGenerationMethods", [])
+            input_token_limit = model.get("inputTokenLimit", 0)
+            output_token_limit = model.get("outputTokenLimit", 0)
+            
+            model_info = {
+                "id": model_name,
+                "name": display_name,
+                "display_name": display_name,
+                "supported_methods": supported_methods,
+                "input_token_limit": input_token_limit,
+                "output_token_limit": output_token_limit,
+                "description": model.get("description", ""),
+                "version": model.get("version", ""),
+            }
+            
+            # Categorize based on name and supported methods
+            if any(method in ["generateContent", "chat"] for method in supported_methods):
+                if "tts" in model_name.lower() or "audio" in model_name.lower():
+                    specialized_models.append(model_info)
+                elif "image" in model_name.lower() or "gen" in model_name.lower():
+                    specialized_models.append(model_info)
+                elif "embedding" in model_name.lower():
+                    specialized_models.append(model_info)
+                else:
+                    chat_models.append(model_info)
+            else:
+                specialized_models.append(model_info)
+        
+        # Sort models by name
+        chat_models.sort(key=lambda x: x["name"])
+        specialized_models.sort(key=lambda x: x["name"])
+        
+        return {
+            "chat_models": chat_models,
+            "specialized_models": specialized_models,
+            "current_model": GEMINI_MODEL,
+            "total_models": len(models),
+            "note": "Model names are case-sensitive. Set GEMINI_MODEL environment variable to change the model."
+        }
+        
+    except httpx.HTTPStatusError as e:
+        if e.response.status_code == 429:
+            logger.warning("⚠️ Rate limit exceeded while fetching models")
+            raise HTTPException(
+                status_code=429,
+                detail="Rate limit exceeded. Please try again in a few moments."
+            )
+        logger.error(f"Error fetching models from API: {str(e)}")
+        raise HTTPException(
+            status_code=e.response.status_code,
+            detail=f"Failed to fetch models: {str(e)}"
+        )
     except Exception as e:
-        return {"status": "unhealthy", "gemini_accessible": False, "error": str(e)}
+        logger.error(f"Error listing models: {str(e)}")
+        raise HTTPException(
+            status_code=500,
+            detail=f"Failed to list available models: {str(e)}"
+        )

@@ -25,6 +25,7 @@ from app.api.user_data import router as user_data_router
 from app.api.user_states import router as user_states_router
 from app.api.session_interactions import router as session_interactions_router
 from app.api.admin import router as admin_router
+from app.api.chatbot import router as chatbot_router
 from app.ml.model_loader import model_loader
 
 # Configure logging
@@ -194,7 +195,7 @@ app.include_router(admin_router)
 # app.include_router(debug_router)  # Temporarily disabled
 # app.include_router(dual_tracking_router)  # Temporarily disabled
 # app.include_router(simple_test_router)  # Temporarily disabled
-# app.include_router(chatbot_router)  # Temporarily disabled - causing timeout
+app.include_router(chatbot_router)
 app.include_router(reviews_router)
 
 

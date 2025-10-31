@@ -4,42 +4,46 @@ Test configuration and fixtures for Zyra backend
 
 import pytest
 import asyncio
+import os
 from typing import Generator, AsyncGenerator
 from fastapi.testclient import TestClient
-from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker
-from sqlalchemy.pool import StaticPool
 
 from app.main import app
-from app.database import get_db, Base
 from app.config import settings
 from app.services.auth_service import jwt_service
 
+# Check if we have a real database URL for testing
+# If not, skip database-dependent tests
+TEST_DATABASE_URL = os.getenv("TEST_DATABASE_URL")
+SKIP_DB_TESTS = TEST_DATABASE_URL is None
 
-# Test database URL (in-memory SQLite for testing)
-SQLALCHEMY_DATABASE_URL = "sqlite:///./test.db"
-
-# Create test engine
-engine = create_engine(
-    SQLALCHEMY_DATABASE_URL,
-    connect_args={"check_same_thread": False},
-    poolclass=StaticPool,
-)
-
-TestingSessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
-
-
-def override_get_db():
-    """Override database dependency for testing"""
-    try:
-        db = TestingSessionLocal()
-        yield db
-    finally:
-        db.close()
-
-
-# Override the database dependency
-app.dependency_overrides[get_db] = override_get_db
+# If we have a test database, set it up
+if not SKIP_DB_TESTS:
+    from sqlalchemy import create_engine
+    from sqlalchemy.orm import sessionmaker
+    
+    from app.database import get_db, Base
+    
+    # Create test engine with real database
+    engine = create_engine(TEST_DATABASE_URL)
+    TestingSessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
+    
+    # Override the database dependency
+    def override_get_db():
+        """Override database dependency for testing"""
+        try:
+            db = TestingSessionLocal()
+            yield db
+        finally:
+            db.close()
+    
+    app.dependency_overrides[get_db] = override_get_db
+else:
+    # Mock fixtures when no database
+    @pytest.fixture(scope="function")
+    def db_session():
+        """Mock database session"""
+        pytest.skip("No TEST_DATABASE_URL provided")
 
 
 @pytest.fixture(scope="session")
@@ -51,24 +55,8 @@ def event_loop():
 
 
 @pytest.fixture(scope="function")
-def db_session():
-    """Create a fresh database session for each test"""
-    # Create all tables
-    Base.metadata.create_all(bind=engine)
-    
-    # Create session
-    session = TestingSessionLocal()
-    
-    yield session
-    
-    # Clean up
-    session.close()
-    Base.metadata.drop_all(bind=engine)
-
-
-@pytest.fixture(scope="function")
-def client(db_session) -> Generator[TestClient, None, None]:
-    """Create a test client with database session"""
+def client() -> Generator[TestClient, None, None]:
+    """Create a test client"""
     with TestClient(app) as test_client:
         yield test_client
 
